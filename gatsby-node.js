@@ -69,7 +69,12 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     // used to number the lessons
     const basename = path.basename(node.fileAbsolutePath, ".md")
 
-    const slug = "/" + folder + value + kebabTitle
+    let slug
+    if (folder === "lessons") {
+      slug = "/" + folder + value + kebabTitle
+    } else {
+      slug = "/" + folder + "/" + kebabTitle
+    }
 
     createNodeField({
       name: `slug`,
