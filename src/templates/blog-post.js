@@ -68,6 +68,9 @@ export default BlogPostTemplate
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
+    file {
+      sourceInstanceName
+    }
     site {
       siteMetadata {
         title

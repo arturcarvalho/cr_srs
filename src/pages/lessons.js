@@ -5,21 +5,23 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
 
-class PostsIndex extends React.Component {
+class LessonsIndex extends React.Component {
   render() {
     const { data } = this.props
     const siteTitle = data.site.siteMetadata.title
-    const posts = data.allMarkdownRemark.edges
+    const lessons = data.allMarkdownRemark.edges
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <SEO
-          title="All posts"
+          title="All Lessons"
           keywords={[`blog`, `gatsby`, `javascript`, `react`]}
         />
 
-        {posts.map(({ node }) => {
-          const title = node.frontmatter.title || node.fields.slug
+        {lessons.map(({ node }) => {
+          const num = node.fields.basename
+          const title = `#${num} ` + node.frontmatter.title
+
           return (
             <div key={node.fields.slug}>
               <h3
@@ -31,7 +33,6 @@ class PostsIndex extends React.Component {
                   {title}
                 </Link>
               </h3>
-              <small>{node.frontmatter.date}</small>
               <p
                 dangerouslySetInnerHTML={{
                   __html: node.frontmatter.description || node.excerpt,
@@ -45,7 +46,7 @@ class PostsIndex extends React.Component {
   }
 }
 
-export default PostsIndex
+export default LessonsIndex
 
 export const pageQuery = graphql`
   query {
@@ -56,13 +57,14 @@ export const pageQuery = graphql`
     }
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { fields: { folder: { eq: "posts" } } }
+      filter: { fields: { folder: { eq: "lessons" } } }
     ) {
       edges {
         node {
           excerpt
           fields {
             slug
+            basename
           }
           frontmatter {
             date(formatString: "MMMM DD, YYYY")

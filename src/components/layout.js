@@ -9,7 +9,7 @@ class Layout extends React.Component {
     const rootPath = `${__PATH_PREFIX__}/`
     let header
 
-    if (location.pathname === rootPath) {
+    if (location.pathname === rootPath || location.pathname === "/lessons") {
       header = (
         <h1
           style={{
@@ -61,6 +61,9 @@ class Layout extends React.Component {
         }}
       >
         <header>{header}</header>
+        <Link to={"/"}>Home</Link>
+        &nbsp;&nbsp;&nbsp;
+        <Link to={"/lessons"}>Lessons</Link>
         <main>{children}</main>
         <footer>
           © {new Date().getFullYear()}, Built with

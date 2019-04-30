@@ -1,5 +1,6 @@
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
+const _ = require("lodash")
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
@@ -14,6 +15,11 @@ exports.createPages = ({ graphql, actions }) => {
         ) {
           edges {
             node {
+              parent {
+                ... on File {
+                  sourceInstanceName
+                }
+              }
               fields {
                 slug
               }
@@ -54,13 +60,33 @@ exports.createPages = ({ graphql, actions }) => {
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
-
   if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
+    const value = createFilePath({ node, getNode }) // file name
+
+    // janky way to build the url: /folder/num/kebab-title
+    const folder = path.dirname(node.fileAbsolutePath).match(/([^\/]*)\/*$/)[1]
+    const kebabTitle = _.kebabCase(node.frontmatter.title)
+    // used to number the lessons
+    const basename = path.basename(node.fileAbsolutePath, ".md")
+
+    const slug = "/" + folder + value + kebabTitle
+
     createNodeField({
       name: `slug`,
       node,
-      value,
+      value: slug,
+    })
+
+    createNodeField({
+      name: `basename`,
+      node,
+      value: basename,
+    })
+
+    createNodeField({
+      name: `folder`,
+      node,
+      value: folder,
     })
   }
 }
