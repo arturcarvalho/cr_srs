@@ -29,6 +29,9 @@ exports.createPages = ({ graphql, actions }) => {
                 date
                 description
                 choices
+                learnMoreUrl
+                learnMoreTitle
+                correct
                 cards
               }
             }

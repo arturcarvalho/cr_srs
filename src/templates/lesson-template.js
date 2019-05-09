@@ -17,8 +17,17 @@ function LessonsTemplate(props) {
   if (filteredCards) {
     cards = filteredCards.map(card => {
       const { html, frontmatter } = card
-      console.log(html, frontmatter.id)
-      return null //<Card key={card.frontmatter.id} id={card.frontmatter.id} />
+
+      const cardArgs = {
+        title: frontmatter.title,
+        learnMoreTitle: frontmatter.learnMoreTitle,
+        learnMoreUrl: frontmatter.learnMoreUrl,
+        correct: frontmatter.correct,
+        choices: frontmatter.choices,
+        html,
+      }
+
+      return <Card key={card.frontmatter.id} {...cardArgs} />
     })
   }
 
@@ -69,7 +78,8 @@ function LessonsTemplate(props) {
       */}
 
       <h3>Training cards</h3>
-      {cards}
+      <div>{cards}</div>
+
       <hr
         style={{
           marginBottom: rhythm(1),
