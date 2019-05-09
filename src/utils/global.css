@@ -38,3 +38,9 @@ body {
   box-shadow: none;
   padding: 0.5em 1em;
 }
+
+.active-menu-item {
+  color: inherit;
+  pointer-events: none;
+  cursor: default;
+}

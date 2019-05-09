@@ -28,10 +28,18 @@ function Menu(props) {
                 <span>{title}</span>
               </Link>
 
-              <Link className="menu-nav-item" to={"/lessons"}>
+              <Link
+                activeClassName="active-menu-item"
+                className="menu-nav-item"
+                to={"/lessons"}
+              >
                 Lessons
               </Link>
-              <Link className="menu-nav-item" to={"/cards"}>
+              <Link
+                activeClassName="active-menu-item"
+                className="menu-nav-item"
+                to={"/cards"}
+              >
                 Training
               </Link>
             </nav>
