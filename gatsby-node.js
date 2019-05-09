@@ -7,6 +7,7 @@ exports.createPages = ({ graphql, actions }) => {
 
   const post = path.resolve(`./src/templates/post-template.js`)
   const lesson = path.resolve(`./src/templates/lesson-template.js`)
+  const card = path.resolve(`./src/templates/card-template.js`)
   return graphql(
     `
       {
@@ -16,13 +17,19 @@ exports.createPages = ({ graphql, actions }) => {
         ) {
           edges {
             node {
+              html
               fields {
                 slug
                 basename
                 folder
               }
               frontmatter {
+                id
                 title
+                date
+                description
+                choices
+                cards
               }
             }
           }
@@ -34,22 +41,39 @@ exports.createPages = ({ graphql, actions }) => {
       throw result.errors
     }
 
-    // Create blog posts pages.
+    // Create all types of pages.
     const pages = result.data.allMarkdownRemark.edges
+
+    // I'm being hacky again, I'm getting all the card nodes so i can use them
+    // inside the lessons. But I don't want to learn graphql just to do a join...
+    const cards = pages.filter(page => page.node.fields.folder === "cards")
 
     pages.forEach((page, index) => {
       const previous = index === pages.length - 1 ? null : pages[index + 1].node
       const next = index === 0 ? null : pages[index - 1].node
 
       let component
+      let filteredCards = []
+      if (page.node.fields.folder === "lessons") {
+        component = lesson
+
+        // build list of card nodes from the ids on the lesson
+        if (page.node.frontmatter.cards) {
+          page.node.frontmatter.cards.forEach(cardId => {
+            const c = cards.find(card => card.node.frontmatter.id === cardId)
+            filteredCards.push(c.node)
+          })
+        }
+      }
       if (page.node.fields.folder === "posts") component = post
-      if (page.node.fields.folder === "lessons") component = lesson
+      if (page.node.fields.folder === "cards") component = card
 
       createPage({
         path: page.node.fields.slug,
         component,
         context: {
           slug: page.node.fields.slug,
+          filteredCards,
           previous,
           next,
         },

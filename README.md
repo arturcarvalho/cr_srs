@@ -5,3 +5,16 @@
 ```sh
 npm start
 ```
+
+## generate id for cards
+
+For now, go to https://npm.runkit.com/shortid and run shortid.generate().
+Eventually, generate them automatically.
+
+## Decisions
+
+- file basename used to order the lessons
+
+## Credits
+
+Used this image to create the logo: https://pixabay.com/illustrations/background-abstract-futuristic-1462755/

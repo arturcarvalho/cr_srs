@@ -1,55 +1,31 @@
 import React from "react"
 import { Link } from "gatsby"
 
-import { rhythm, scale } from "../utils/typography"
+import { rhythm } from "../utils/typography"
 
 function Layout(props) {
-  const { location, title, children } = props
-  const rootPath = `${__PATH_PREFIX__}/`
-  let header
+  const { title, children } = props
+  // const rootPath = `${__PATH_PREFIX__}/`
+  let header = (
+    <h3
+      style={{
+        fontFamily: `Montserrat, sans-serif`,
+        marginTop: 0,
+      }}
+    >
+      <Link
+        style={{
+          boxShadow: `none`,
+          textDecoration: `none`,
+          color: `inherit`,
+        }}
+        to={`/`}
+      >
+        {title}
+      </Link>
+    </h3>
+  )
 
-  if (location.pathname === rootPath || location.pathname === "/lessons") {
-    header = (
-      <h1
-        style={{
-          ...scale(1.5),
-          marginBottom: rhythm(1.5),
-          marginTop: 0,
-        }}
-      >
-        <Link
-          style={{
-            boxShadow: `none`,
-            textDecoration: `none`,
-            color: `inherit`,
-          }}
-          to={`/`}
-        >
-          {title}
-        </Link>
-      </h1>
-    )
-  } else {
-    header = (
-      <h3
-        style={{
-          fontFamily: `Montserrat, sans-serif`,
-          marginTop: 0,
-        }}
-      >
-        <Link
-          style={{
-            boxShadow: `none`,
-            textDecoration: `none`,
-            color: `inherit`,
-          }}
-          to={`/`}
-        >
-          {title}
-        </Link>
-      </h3>
-    )
-  }
   return (
     <div
       style={{
@@ -63,6 +39,8 @@ function Layout(props) {
       <Link to={"/"}>Home</Link>
       &nbsp;&nbsp;&nbsp;
       <Link to={"/lessons"}>Lessons</Link>
+      &nbsp;&nbsp;&nbsp;
+      <Link to={"/cards"}>Training</Link>
       <main>{children}</main>
       <footer>
         © {new Date().getFullYear()}, Built with
