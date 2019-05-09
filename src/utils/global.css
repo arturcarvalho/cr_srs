@@ -1,0 +1,40 @@
+:root {
+  --white-color: #fff;
+}
+
+body {
+  background-color: var(--white-color);
+}
+
+.menu {
+  background-color: var(--white-color);
+  padding: 0.5em 0;
+}
+
+.menu-nav {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.menu-nav-title {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  font-size: 2em;
+  font-family: Montserrat, sans-serif;
+  margin-top: 0;
+  box-shadow: none;
+  text-decoration: none;
+  color: inherit;
+}
+
+.menu-nav-title span {
+  margin-left: 0.5em;
+}
+
+.menu-nav-item {
+  font-size: 1.2em;
+  box-shadow: none;
+  padding: 0.5em 1em;
+}

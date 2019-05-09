@@ -1,30 +1,11 @@
 import React from "react"
-import { Link } from "gatsby"
 
 import { rhythm } from "../utils/typography"
+import Menu from "../components/menu"
 
 function Layout(props) {
   const { title, children } = props
   // const rootPath = `${__PATH_PREFIX__}/`
-  let header = (
-    <h3
-      style={{
-        fontFamily: `Montserrat, sans-serif`,
-        marginTop: 0,
-      }}
-    >
-      <Link
-        style={{
-          boxShadow: `none`,
-          textDecoration: `none`,
-          color: `inherit`,
-        }}
-        to={`/`}
-      >
-        {title}
-      </Link>
-    </h3>
-  )
 
   return (
     <div
@@ -32,15 +13,11 @@ function Layout(props) {
         marginLeft: `auto`,
         marginRight: `auto`,
         maxWidth: rhythm(24),
-        padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
+        padding: `0 ${rhythm(3 / 4)} ${rhythm(1)} ${rhythm(3 / 4)}`,
       }}
     >
-      <header>{header}</header>
-      <Link to={"/"}>Home</Link>
-      &nbsp;&nbsp;&nbsp;
-      <Link to={"/lessons"}>Lessons</Link>
-      &nbsp;&nbsp;&nbsp;
-      <Link to={"/cards"}>Training</Link>
+      <Menu title={title} />
+
       <main>{children}</main>
       <footer>
         © {new Date().getFullYear()}, Built with
