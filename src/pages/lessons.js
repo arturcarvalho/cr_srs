@@ -20,7 +20,7 @@ class LessonsIndex extends React.Component {
 
         {lessons.map(({ node }) => {
           const num = node.fields.basename
-          const title = `#${num} ` + node.frontmatter.title
+          const title = `${num}. ` + node.frontmatter.title
 
           return (
             <div key={node.fields.slug}>

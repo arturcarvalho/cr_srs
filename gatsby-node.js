@@ -10,18 +10,14 @@ exports.createPages = ({ graphql, actions }) => {
     `
       {
         allMarkdownRemark(
-          sort: { fields: [frontmatter___date], order: DESC }
+          sort: { fields: [fields___basename], order: ASC }
           limit: 1000
         ) {
           edges {
             node {
-              parent {
-                ... on File {
-                  sourceInstanceName
-                }
-              }
               fields {
                 slug
+                basename
               }
               frontmatter {
                 title
