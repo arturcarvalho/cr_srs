@@ -5,7 +5,8 @@ const _ = require("lodash")
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
-  const blogPost = path.resolve(`./src/templates/blog-post.js`)
+  const post = path.resolve(`./src/templates/post-template.js`)
+  const lesson = path.resolve(`./src/templates/lesson-template.js`)
   return graphql(
     `
       {
@@ -18,6 +19,7 @@ exports.createPages = ({ graphql, actions }) => {
               fields {
                 slug
                 basename
+                folder
               }
               frontmatter {
                 title
@@ -33,17 +35,21 @@ exports.createPages = ({ graphql, actions }) => {
     }
 
     // Create blog posts pages.
-    const posts = result.data.allMarkdownRemark.edges
+    const pages = result.data.allMarkdownRemark.edges
 
-    posts.forEach((post, index) => {
-      const previous = index === posts.length - 1 ? null : posts[index + 1].node
-      const next = index === 0 ? null : posts[index - 1].node
+    pages.forEach((page, index) => {
+      const previous = index === pages.length - 1 ? null : pages[index + 1].node
+      const next = index === 0 ? null : pages[index - 1].node
+
+      let component
+      if (page.node.fields.folder === "posts") component = post
+      if (page.node.fields.folder === "lessons") component = lesson
 
       createPage({
-        path: post.node.fields.slug,
-        component: blogPost,
+        path: page.node.fields.slug,
+        component,
         context: {
-          slug: post.node.fields.slug,
+          slug: page.node.fields.slug,
           previous,
           next,
         },
@@ -65,12 +71,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     // used to number the lessons
     const basename = path.basename(node.fileAbsolutePath, ".md")
 
-    let slug
-    if (folder === "lessons") {
-      slug = "/" + folder + value + kebabTitle
-    } else {
-      slug = "/" + folder + "/" + kebabTitle
-    }
+    const slug = "/" + folder + "/" + kebabTitle
 
     createNodeField({
       name: `slug`,
