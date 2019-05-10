@@ -54,7 +54,7 @@ const menuQuery = graphql`
   query menuQuery {
     avatar: file(absolutePath: { regex: "assets/indy-icon.png/" }) {
       childImageSharp {
-        fixed(width: 50, height: 50) {
+        fixed(width: 40, height: 40) {
           ...GatsbyImageSharpFixed
         }
       }
