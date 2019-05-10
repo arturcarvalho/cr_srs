@@ -1,5 +1,6 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import { connect } from "react-redux"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -7,6 +8,7 @@ import { rhythm } from "../utils/typography"
 
 function PostsIndex(props) {
   const { data } = props
+  console.log(props.counter)
   const siteTitle = data.site.siteMetadata.title
   const posts = data.allMarkdownRemark.edges
 
@@ -43,7 +45,13 @@ function PostsIndex(props) {
   )
 }
 
-export default PostsIndex
+const mapState = state => {
+  return {
+    counter: state.progress.counter,
+  }
+}
+
+export default connect(mapState)(PostsIndex)
 
 export const pageQuery = graphql`
   query {
