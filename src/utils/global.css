@@ -73,6 +73,10 @@ body {
   background-color: var(--green-color);
 }
 
+.incorrect-card-choice {
+  background-color: var(--red-color);
+}
+
 /* BALL */
 
 .ball {

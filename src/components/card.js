@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 
 import MixedLink from "./mixedLink"
 import StatusBall from "./statusBall"
@@ -16,6 +16,9 @@ function Card(props) {
     choices,
   } = props
 
+  // Save answer locally, just to track when it's wrong.
+  // This way, I can track the wrong answers only while the user is on the page.
+  const [currentAnswer, localAnswer] = useState(null)
   let choiceList = null
 
   if (choices) {
@@ -23,11 +26,14 @@ function Card(props) {
       const cls = ["card-choice"]
 
       if (isCorrect && choice === correct) cls.push("correct-card-choice")
+      if (!isCorrect && currentAnswer === choice)
+        cls.push("incorrect-card-choice")
       return (
         <div key={choice}>
           <button
             className={cls.join(" ")}
             onClick={() => {
+              localAnswer(choice)
               answer(id, choice, correct)
             }}
           >
