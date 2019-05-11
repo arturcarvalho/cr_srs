@@ -36,6 +36,12 @@ function CardsIndex(props) {
         const num = node.fields.basename
         const title = `${num}. ` + node.frontmatter.title
         const id = node.frontmatter.id
+        const tags = node.frontmatter.tags
+
+        if (tags) {
+          const areAllExcluded = tags.every(t => excludeTags.includes(t))
+          if (areAllExcluded) return null
+        }
 
         // DUPLICATING CODE HERE AND ON CARD CONTAINER. REFACTOR
         const isCorrect = isCardCorrect(id, props.answersById)
