@@ -1,11 +1,15 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import { connect } from "react-redux"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
+import { answer } from "../state/progressActions"
+import isCardCorrect from "../utils/isCardCorrect"
+import StatusBall from "../components/statusBall"
 
-function LessonsIndex(props) {
+function CardsIndex(props) {
   const { data } = props
   const siteTitle = data.site.siteMetadata.title
   const lessons = data.allMarkdownRemark.edges
@@ -20,6 +24,10 @@ function LessonsIndex(props) {
       {lessons.map(({ node }) => {
         const num = node.fields.basename
         const title = `${num}. ` + node.frontmatter.title
+        const id = node.frontmatter.id
+        
+        // DUPLICATING CODE HERE AND ON CARD CONTAINER. REFACTOR
+        const isCorrect = isCardCorrect(id, props.answersById)
 
         return (
           <div key={node.fields.slug}>
@@ -29,6 +37,7 @@ function LessonsIndex(props) {
               }}
             >
               <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
+                <StatusBall isCorrect={isCorrect} />
                 {title}
               </Link>
             </h3>
@@ -44,7 +53,16 @@ function LessonsIndex(props) {
   )
 }
 
-export default LessonsIndex
+const mapState = state => {
+  return {
+    answersById: state.progress.answersById,
+  }
+}
+
+export default connect(
+  mapState,
+  { answer }
+)(CardsIndex)
 
 export const pageQuery = graphql`
   query {
@@ -65,6 +83,7 @@ export const pageQuery = graphql`
             basename
           }
           frontmatter {
+            id
             date(formatString: "MMMM DD, YYYY")
             title
             description
