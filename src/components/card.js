@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useRef, useEffect } from "react"
 
 import MixedLink from "./mixedLink"
 import StatusBall from "./statusBall"
@@ -19,7 +19,14 @@ function Card(props) {
   // Save answer locally, just to track when it's wrong.
   // This way, I can track the wrong answers only while the user is on the page.
   const [currentAnswer, localAnswer] = useState(null)
+  const [inputAnswer, changeInputAnswer] = useState("")
+  const inputRef = useRef()
+  const inputId = "input" + id
   let choiceList = null
+
+  useEffect(() => {
+    if (isCorrect) changeInputAnswer(correct)
+  }, [])
 
   if (choices) {
     choiceList = choices.map(choice => {
@@ -44,6 +51,17 @@ function Card(props) {
     })
   }
 
+  useEffect(() => {
+    if (!choiceList) inputRef.current.focus()
+  }, [])
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    if (correct !== inputAnswer) changeInputAnswer("")
+
+    answer(id, inputAnswer, correct)
+  }
+
   return (
     <section className="card-container">
       <h3>
@@ -52,7 +70,23 @@ function Card(props) {
       </h3>
       <div dangerouslySetInnerHTML={{ __html: html }} />
 
-      {choiceList}
+      {choiceList && choiceList}
+      {!choiceList && (
+        <form onSubmit={handleSubmit}>
+          <input
+            aria-label="input answer"
+            id={inputId}
+            className="card-input"
+            ref={inputRef}
+            type="text"
+            value={inputAnswer}
+            onChange={e => {
+              changeInputAnswer(e.target.value)
+            }}
+          />
+          <input className="card-submit" type="submit" value="Answer" />
+        </form>
+      )}
       <section>
         Learn more: <MixedLink to={learnMoreUrl}>{learnMoreTitle}</MixedLink>
       </section>
