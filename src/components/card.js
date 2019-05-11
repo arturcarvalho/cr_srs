@@ -1,6 +1,7 @@
 import React from "react"
 
 import MixedLink from "./mixedLink"
+import StatusBall from "./statusBall"
 
 function Card(props) {
   const {
@@ -34,15 +35,10 @@ function Card(props) {
     })
   }
 
-  const ballClass = ["ball"]
-  if (isCorrect === null) ballClass.push("empty-ball")
-  else if (isCorrect) ballClass.push("correct-ball")
-  else ballClass.push("incorrect-ball")
-
   return (
     <section className="card-container">
       <h3>
-        <span className={ballClass.join(" ")} />
+        <StatusBall isCorrect={isCorrect} />
         Card {title}
       </h3>
       <div dangerouslySetInnerHTML={{ __html: html }} />
