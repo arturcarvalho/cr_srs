@@ -1,29 +1,39 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { connect } from "react-redux"
 
 import Card from "../components/card"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
+import { answer } from "../state/progressActions"
+import isCardCorrect from "../utils/isCardCorrect"
 
 function CardTemplate(props) {
-  const post = props.data.markdownRemark
+  const card = props.data.markdownRemark
   const siteTitle = props.data.site.siteMetadata.title
 
+  const id = card.frontmatter.id
+
+  const isCorrect = isCardCorrect(id, props.answersById)
+
   const cardArgs = {
-    title: post.frontmatter.title,
-    choices: post.frontmatter.choices,
-    correct: post.frontmatter.correct,
-    learnMoreUrl: post.frontmatter.learnMoreUrl,
-    learnMoreTitle: post.frontmatter.learnMoreTitle,
-    html: post.html,
+    answer: props.answer, // fn
+    id,
+    isCorrect,
+    title: card.frontmatter.title,
+    choices: card.frontmatter.choices,
+    correct: card.frontmatter.correct,
+    learnMoreUrl: card.frontmatter.learnMoreUrl,
+    learnMoreTitle: card.frontmatter.learnMoreTitle,
+    html: card.html,
   }
 
   return (
     <Layout location={props.location} title={siteTitle}>
       <SEO
-        title={post.frontmatter.title}
-        description={post.frontmatter.description || post.excerpt}
+        title={card.frontmatter.title}
+        description={card.frontmatter.description || card.excerpt}
       />
       <Card {...cardArgs} />
 
@@ -36,7 +46,16 @@ function CardTemplate(props) {
   )
 }
 
-export default CardTemplate
+const mapState = state => {
+  return {
+    answersById: state.progress.answersById,
+  }
+}
+
+export default connect(
+  mapState,
+  { answer }
+)(CardTemplate)
 
 export const pageQuery = graphql`
   query CardsBySlug($slug: String!) {
@@ -54,6 +73,7 @@ export const pageQuery = graphql`
       excerpt(pruneLength: 160)
       html
       frontmatter {
+        id
         learnMoreUrl
         learnMoreTitle
         choices

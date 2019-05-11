@@ -1,6 +1,10 @@
+/* https://www.sessions.edu/color-calculator/ */
 :root {
   --white-color: #fff;
   --blue-color: #007acc;
+  --gray-color: #eee;
+  --green-color: #00cc52;
+  --red-color: #cc003d;
 }
 
 body {
@@ -63,4 +67,26 @@ body {
   margin: 5px 0;
   text-align: left;
   padding: 0.7em;
+}
+
+/* BALL */
+
+.ball {
+  display: inline-block;
+  border-radius: 50%;
+  height: 0.8em;
+  width: 0.8em;
+
+  margin-right: 5px;
+}
+
+.empty-ball {
+  background: var(--gray-color);
+}
+
+.correct-ball {
+  background: var(--green-color);
+}
+.incorrect-ball {
+  background: var(--red-color);
 }

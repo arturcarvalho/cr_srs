@@ -1,7 +1,10 @@
 import actionTypes from "./actionTypes"
 
-export const increment = () => {
+export const answer = (id, answer, correct) => {
   return {
-    type: actionTypes.INCREMENT,
+    type: actionTypes.ANSWER,
+    id,
+    answer,
+    correct,
   }
 }

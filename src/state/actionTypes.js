@@ -1,3 +1,3 @@
 export default {
-  INCREMENT: "INCREMENT",
+  ANSWER: "ANSWER",
 }

@@ -1,13 +1,26 @@
 import actionTypes from "./actionTypes"
 
+/**
+ * SHAPE
+ *   answersById: {
+ *    VDs4rKJnb: { correct: false },
+ * },
+ */
+
 const initialState = {
-  counter: 123,
+  answersById: {},
 }
 
 function progress(state = initialState, action) {
   switch (action.type) {
-    case actionTypes.INCREMENT:
-      return { ...state, counter: state.counter + 1 }
+    case actionTypes.ANSWER:
+      return {
+        ...state,
+        answersById: {
+          ...state.answersById,
+          [action.id]: { correct: action.correct === action.answer },
+        },
+      }
     default:
       return state
   }
