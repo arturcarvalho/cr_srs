@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link, graphql } from "gatsby"
 import { connect } from "react-redux"
 import union from "lodash.union"
@@ -9,6 +9,7 @@ import { rhythm } from "../utils/typography"
 import { answer } from "../state/progressActions"
 import isCardCorrect from "../utils/isCardCorrect"
 import StatusBall from "../components/statusBall"
+import TagFilter from "../components/tagFilter"
 
 function CardsIndex(props) {
   const { data } = props
@@ -20,6 +21,8 @@ function CardsIndex(props) {
     allTags = union(allTags, node.frontmatter.tags)
   })
 
+  const [excludeTags, setExcludeTags] = useState([])
+
   return (
     <Layout location={props.location} title={siteTitle}>
       <SEO
@@ -27,12 +30,7 @@ function CardsIndex(props) {
         keywords={[`blog`, `gatsby`, `javascript`, `react`]}
       />
 
-      <b>Tags: </b>
-      <>
-        {allTags.map(tag => {
-          return <span key={tag}>{tag} &nbsp;</span>
-        })}
-      </>
+      <TagFilter {...{ allTags, excludeTags, setExcludeTags }} />
 
       {lessons.map(({ node }) => {
         const num = node.fields.basename

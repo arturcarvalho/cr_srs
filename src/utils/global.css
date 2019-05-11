@@ -110,3 +110,24 @@ body {
 .incorrect-ball {
   background: var(--red-color);
 }
+
+/* TAGS */
+.tag {
+  border: none;
+  padding: 5px;
+  margin: 4px;
+  border-radius: 3px;
+}
+
+.tag-all {
+  background: var(--blue-color);
+  color: var(--white-color);
+}
+
+.tag-on {
+  background: var(--green-color);
+}
+
+.tag-off {
+  background: none;
+}
