@@ -39,7 +39,7 @@ function CardsIndex(props) {
         const tags = node.frontmatter.tags
 
         if (tags) {
-          const areAllExcluded = tags.every(t => excludeTags.includes(t))
+          const areAllExcluded = tags.some(t => excludeTags.includes(t))
           if (areAllExcluded) return null
         }
 
