@@ -14,6 +14,7 @@ function CardTemplate(props) {
 
   const cardArgs = {
     id,
+    tags: card.frontmatter.tags,
     title: card.frontmatter.title,
     choices: card.frontmatter.choices,
     correct: card.frontmatter.correct,
@@ -65,6 +66,7 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         description
+        tags
       }
     }
   }

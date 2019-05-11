@@ -1,6 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import { connect } from "react-redux"
+import union from "lodash.union"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -14,6 +15,11 @@ function CardsIndex(props) {
   const siteTitle = data.site.siteMetadata.title
   const lessons = data.allMarkdownRemark.edges
 
+  let allTags = []
+  lessons.forEach(({ node }) => {
+    allTags = union(allTags, node.frontmatter.tags)
+  })
+
   return (
     <Layout location={props.location} title={siteTitle}>
       <SEO
@@ -21,11 +27,18 @@ function CardsIndex(props) {
         keywords={[`blog`, `gatsby`, `javascript`, `react`]}
       />
 
+      <b>Tags: </b>
+      <>
+        {allTags.map(tag => {
+          return <span key={tag}>{tag} &nbsp;</span>
+        })}
+      </>
+
       {lessons.map(({ node }) => {
         const num = node.fields.basename
         const title = `${num}. ` + node.frontmatter.title
         const id = node.frontmatter.id
-        
+
         // DUPLICATING CODE HERE AND ON CARD CONTAINER. REFACTOR
         const isCorrect = isCardCorrect(id, props.answersById)
 
@@ -84,6 +97,7 @@ export const pageQuery = graphql`
           }
           frontmatter {
             id
+            tags
             date(formatString: "MMMM DD, YYYY")
             title
             description

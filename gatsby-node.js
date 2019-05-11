@@ -28,6 +28,7 @@ exports.createPages = ({ graphql, actions }) => {
                 title
                 date
                 description
+                tags
                 choices
                 learnMoreUrl
                 learnMoreTitle
