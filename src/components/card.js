@@ -11,20 +11,14 @@ function Card(props) {
     choiceList = choices.map(choice => {
       return (
         <div key={choice}>
-          <button>{choice}</button>
+          <button className="card-choice">{choice}</button>
         </div>
       )
     })
   }
 
   return (
-    <section
-      style={{
-        backgroundColor: "#c2c2c2",
-        padding: "10px",
-        marginBottom: "10px",
-      }}
-    >
+    <section className="card-container">
       <h3>Card {title}</h3>
       <div dangerouslySetInnerHTML={{ __html: html }} />
 

@@ -1,11 +1,13 @@
 :root {
   --white-color: #fff;
+  --blue-color: #007acc;
 }
 
 body {
   background-color: var(--white-color);
 }
 
+/* MENU */
 .menu {
   background-color: var(--white-color);
   padding: 0.5em 0;
@@ -43,4 +45,22 @@ body {
   color: inherit;
   pointer-events: none;
   cursor: default;
+}
+
+/* CARD */
+.card-container {
+  padding: "10px";
+  margin-bottom: "10px";
+}
+
+.card-choice {
+  background: var(--blue-color);
+  color: var(--white-color);
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  width: calc(100% - 10px);
+  margin: 5px 0;
+  text-align: left;
+  padding: 0.7em;
 }
