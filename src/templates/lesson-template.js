@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 
-import Card from "../components/card"
+import CardContainer from "../components/cardContainer"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
@@ -19,6 +19,7 @@ function LessonsTemplate(props) {
       const { html, frontmatter } = card
 
       const cardArgs = {
+        id: frontmatter.id,
         title: frontmatter.title,
         learnMoreTitle: frontmatter.learnMoreTitle,
         learnMoreUrl: frontmatter.learnMoreUrl,
@@ -27,7 +28,7 @@ function LessonsTemplate(props) {
         html,
       }
 
-      return <Card key={card.frontmatter.id} {...cardArgs} />
+      return <CardContainer key={card.frontmatter.id} {...cardArgs} />
     })
   }
 
