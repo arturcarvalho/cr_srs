@@ -20,10 +20,13 @@ function Card(props) {
 
   if (choices) {
     choiceList = choices.map(choice => {
+      const cls = ["card-choice"]
+
+      if (isCorrect && choice === correct) cls.push("correct-card-choice")
       return (
         <div key={choice}>
           <button
-            className="card-choice"
+            className={cls.join(" ")}
             onClick={() => {
               answer(id, choice, correct)
             }}
