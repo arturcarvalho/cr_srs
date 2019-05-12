@@ -135,20 +135,21 @@ body {
 /* PROGRESS */
 .progress-squares {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .correct-square {
   background-color: var(--green-color);
   height: 20px;
   width: 20px;
-  margin: 1px;
+  margin: 2px;
 }
 
 .missing-square {
   background-color: var(--gray-color);
   height: 20px;
   width: 20px;
-  margin: 1px;
+  margin: 2px;
 }
 
 .reset-btn {
