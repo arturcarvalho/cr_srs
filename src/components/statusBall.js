@@ -1,9 +1,9 @@
 import React from "react"
 
-export const StatusBall = props => {
+export const StatusBall = ({ isCorrect }) => {
   const ballClass = ["ball"]
-  if (props.isCorrect === null) ballClass.push("empty-ball")
-  else if (props.isCorrect) ballClass.push("correct-ball")
+  if (isCorrect === null) ballClass.push("empty-ball")
+  else if (isCorrect) ballClass.push("correct-ball")
   else ballClass.push("incorrect-ball")
 
   return <span className={ballClass.join(" ")} />

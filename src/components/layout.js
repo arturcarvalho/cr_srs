@@ -3,8 +3,7 @@ import React from "react"
 import { rhythm } from "../utils/typography"
 import Menu from "../components/menu"
 
-function Layout(props) {
-  const { title, children } = props
+function Layout({ title, children }) {
   // const rootPath = `${__PATH_PREFIX__}/`
 
   return (

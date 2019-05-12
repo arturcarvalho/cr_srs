@@ -1,7 +1,6 @@
 import React from "react"
 
-const TagFilter = props => {
-  const { allTags, excludeTags, setExcludeTags } = props
+const TagFilter = ({ allTags, excludeTags, setExcludeTags }) => {
   const toggleAllTags = () => {
     if (excludeTags.length === 0) {
       setExcludeTags(allTags)

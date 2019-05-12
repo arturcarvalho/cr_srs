@@ -4,8 +4,7 @@ import Image from "gatsby-image"
 
 import { rhythm } from "../utils/typography"
 
-function Menu(props) {
-  const { title } = props
+function Menu({ title }) {
   return (
     <StaticQuery
       query={menuQuery}

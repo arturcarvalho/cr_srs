@@ -3,19 +3,17 @@ import React, { useState, useRef, useEffect } from "react"
 import MixedLink from "./mixedLink"
 import StatusBall from "./statusBall"
 
-function Card(props) {
-  const {
-    id,
-    answer,
-    isCorrect,
-    correct,
-    title,
-    html,
-    learnMoreTitle,
-    learnMoreUrl,
-    choices,
-  } = props
-
+function Card({
+  id,
+  answer,
+  isCorrect,
+  correct,
+  title,
+  html,
+  learnMoreTitle,
+  learnMoreUrl,
+  choices,
+}) {
   // Save answer locally, just to track when it's wrong.
   // This way, I can track the wrong answers only while the user is on the page.
   const [currentAnswer, localAnswer] = useState(null)
