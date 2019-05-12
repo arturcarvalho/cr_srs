@@ -8,7 +8,7 @@ const Progress = ({ resetProgress, totalCards, correctCardsCount }) => {
         {correctCardsCount} / {totalCards}
       </div>
       {correctCardsCount > 0 && (
-        <button onClick={resetProgress}>Reset Progress</button>
+        <button className="reset-btn" onClick={resetProgress}>Reset Progress</button>
       )}
     </>
   )
