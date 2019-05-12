@@ -27,9 +27,43 @@ function Index(props) {
     <Layout location={props.location} title={siteTitle}>
       <SEO title="All cards" keywords={[`javascript`, `react`]} />
 
-      <h2>What is this?</h2>
-      <p>Let me tell you!</p>
-      
+      <br />
+      <br />
+      <br />
+
+      <blockquote>
+        Do you ever get stuck while coding? Do you google the solution?
+      </blockquote>
+
+      <p>
+        I do that all the time. But I want to avoid these interruptions.
+        <br />
+        So I built this
+        <b>
+          {" "}
+          lessons + exercises + <a href="https://sivers.org/srs>">SRS</a>{" "}
+        </b>
+        (not yet) site.
+      </p>
+
+      <h3>Why?</h3>
+
+      <ul>
+        <li>
+          If you practice, you don't forget, so you avoid the googling
+          interruptions.
+        </li>
+        <li>
+          Practicing questions about the lessons makes you think in a different
+          way.
+        </li>
+
+        <li>
+          You can <i>toilet learn</i> on your phone.
+        </li>
+      </ul>
+
+      <p>TL;DR deeper learning, without forgetting. </p>
       <Progress {...progressArgs} />
     </Layout>
   )
