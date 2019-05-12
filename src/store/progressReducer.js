@@ -21,6 +21,10 @@ function progress(state = initialState, action) {
           [action.id]: { correct: action.correct === action.answer },
         },
       }
+
+    case actionTypes.RESET_PROGRESS:
+      return initialState
+
     default:
       return state
   }

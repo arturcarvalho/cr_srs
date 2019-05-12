@@ -1,3 +1,4 @@
 export default {
   ANSWER: "ANSWER",
+  RESET_PROGRESS: "RESET_PROGRESS",
 }

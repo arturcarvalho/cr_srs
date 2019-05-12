@@ -8,3 +8,7 @@ export const answer = (id, answer, correct) => {
     correct,
   }
 }
+
+export const resetProgress = () => {
+  return { type: actionTypes.RESET_PROGRESS }
+}

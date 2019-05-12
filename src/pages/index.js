@@ -1,50 +1,50 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
+import { connect } from "react-redux"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { rhythm } from "../utils/typography"
+import Progress from "../components/progress"
+import { resetProgress } from "../store/progressActions"
 
-function PostsIndex(props) {
+function Index(props) {
   const { data } = props
 
   const siteTitle = data.site.siteMetadata.title
-  const posts = data.allMarkdownRemark.edges
+  const cards = data.allMarkdownRemark.edges.map(el => el.node.frontmatter.id)
+  let correctCardsCount = 0
+  Object.keys(props.answersById).forEach(c => {
+    if (props.answersById[c].correct) correctCardsCount++
+  })
+
+  const progressArgs = {
+    totalCards: cards.length,
+    correctCardsCount,
+    resetProgress: props.resetProgress,
+  }
 
   return (
     <Layout location={props.location} title={siteTitle}>
-      <SEO
-        title="All posts"
-        keywords={[`blog`, `gatsby`, `javascript`, `react`]}
-      />
+      <SEO title="All cards" keywords={[`javascript`, `react`]} />
 
-      {posts.map(({ node }) => {
-        const title = node.frontmatter.title || node.fields.slug
-        return (
-          <div key={node.fields.slug}>
-            <h3
-              style={{
-                marginBottom: rhythm(1 / 4),
-              }}
-            >
-              <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                {title}
-              </Link>
-            </h3>
-            <small>{node.frontmatter.date}</small>
-            <p
-              dangerouslySetInnerHTML={{
-                __html: node.frontmatter.description || node.excerpt,
-              }}
-            />
-          </div>
-        )
-      })}
+      <h2>What is this?</h2>
+      <p>Let me tell you!</p>
+      
+      <Progress {...progressArgs} />
     </Layout>
   )
 }
 
-export default PostsIndex
+const mapState = state => {
+  return {
+    answersById: state.progress.answersById,
+  }
+}
+
+export default connect(
+  mapState,
+  { resetProgress }
+)(Index)
 
 export const pageQuery = graphql`
   query {
@@ -53,20 +53,11 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(
-      sort: { fields: [frontmatter___date], order: DESC }
-      filter: { fields: { folder: { eq: "posts" } } }
-    ) {
+    allMarkdownRemark(filter: { fields: { folder: { eq: "cards" } } }) {
       edges {
         node {
-          excerpt
-          fields {
-            slug
-          }
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            title
-            description
+            id
           }
         }
       }
