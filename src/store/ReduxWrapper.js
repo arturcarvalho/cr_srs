@@ -1,9 +1,19 @@
 import React from "react"
 import { Provider } from "react-redux"
 import { createStore as reduxCreateStore } from "redux"
-import rootReducer from "./rootReducer"
+import throttle from "lodash.throttle"
 
-const createStore = () => reduxCreateStore(rootReducer)
-export default ({ element }) => (
-  <Provider store={createStore()}>{element}</Provider>
+import rootReducer from "./rootReducer"
+import { loadState, saveState } from "./localStorage"
+
+const persistedState = loadState()
+const store = reduxCreateStore(rootReducer, persistedState)
+
+// update localstore at most once per second
+store.subscribe(
+  throttle(() => {
+    saveState(store.getState())
+  }, 1000)
 )
+
+export default ({ element }) => <Provider store={store}>{element}</Provider>
