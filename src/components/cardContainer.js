@@ -2,7 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 
 import Card from "./card"
-import { answer } from "../state/progressActions"
+import { answer } from "../store/progressActions"
 import isCardCorrect from "../utils/isCardCorrect"
 
 const CardContainer = props => {
