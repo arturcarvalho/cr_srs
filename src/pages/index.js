@@ -49,13 +49,9 @@ function Index(props) {
       <h3>Why?</h3>
 
       <ul>
+        <li>If you remember stuff, you avoid the googling interruptions.</li>
         <li>
-          If you practice, you don't forget, so you avoid the googling
-          interruptions.
-        </li>
-        <li>
-          Practicing questions about the lessons makes you think in a different
-          way.
+          Questions makes you think in a different angle about the topic. way.
         </li>
 
         <li>
