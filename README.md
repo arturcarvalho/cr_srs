@@ -8,8 +8,8 @@ npm start
 
 ## generate id for cards
 
-For now, go to https://npm.runkit.com/shortid and run shortid.generate().
-Eventually, generate them automatically.
+I'm just using this to generate ids. Still no idea how I could auto insert an id on the cards I'm generating. I'd need some kind of weird trigger onFileCreate or something. Looks like too much work for what is needed.
+http://www.shortguid.com/#/guid/uid-64
 
 ## Decisions
 
