@@ -2,7 +2,7 @@
 :root {
   --white-color: #fff;
   --blue-color: #007acc;
-  --gray-color: #eee;
+  --gray-color: #e2e2e2;
   --green-color: #00cc52;
   --red-color: #cc003d;
 }
@@ -133,6 +133,24 @@ body {
 }
 
 /* PROGRESS */
+.progress-squares {
+  display: flex;
+}
+
+.correct-square {
+  background-color: var(--green-color);
+  height: 20px;
+  width: 20px;
+  margin: 1px;
+}
+
+.missing-square {
+  background-color: var(--gray-color);
+  height: 20px;
+  width: 20px;
+  margin: 1px;
+}
+
 .reset-btn {
   border: none;
   padding: 10px;
