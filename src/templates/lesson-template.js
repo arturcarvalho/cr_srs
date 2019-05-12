@@ -78,9 +78,12 @@ function LessonsTemplate(props) {
       </ul>
       */}
 
-      <h3>Training cards</h3>
-      <div>{cards}</div>
-
+      {filteredCards.length > 0 && (
+        <>
+          <h3>Training cards</h3>
+          <div>{cards}</div>
+        </>
+      )}
       <hr
         style={{
           marginBottom: rhythm(1),
