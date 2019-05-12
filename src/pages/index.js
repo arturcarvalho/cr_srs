@@ -50,9 +50,7 @@ function Index(props) {
 
       <ul>
         <li>If you remember stuff, you avoid the googling interruptions.</li>
-        <li>
-          Questions makes you think in a different angle about the topic. way.
-        </li>
+        <li>Questions makes you think in a different angle about the topic.</li>
 
         <li>
           You can <i>toilet learn</i> on your phone.
