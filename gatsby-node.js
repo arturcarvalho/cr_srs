@@ -6,7 +6,7 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
   const post = path.resolve(`./src/templates/post-template.js`)
-  const lesson = path.resolve(`./src/templates/lesson-template.js`)
+  const article = path.resolve(`./src/templates/article-template.js`)
   const card = path.resolve(`./src/templates/card-template.js`)
   return graphql(
     `
@@ -49,7 +49,7 @@ exports.createPages = ({ graphql, actions }) => {
     const pages = result.data.allMarkdownRemark.edges
 
     // I'm being hacky again, I'm getting all the card nodes so i can use them
-    // inside the lessons. But I don't want to learn graphql just to do a join...
+    // inside the articles. But I don't want to learn graphql just to do a join...
     const cards = pages.filter(page => page.node.fields.folder === "cards")
 
     pages.forEach((page, index) => {
@@ -58,10 +58,10 @@ exports.createPages = ({ graphql, actions }) => {
 
       let component
       let filteredCards = []
-      if (page.node.fields.folder === "lessons") {
-        component = lesson
+      if (page.node.fields.folder === "articles") {
+        component = article
 
-        // build list of card nodes from the ids on the lesson
+        // build list of card nodes from the ids on the article
         if (page.node.frontmatter.cards) {
           page.node.frontmatter.cards.forEach(cardId => {
             const c = cards.find(card => card.node.frontmatter.id === cardId)
@@ -96,7 +96,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     // janky way to build the url: /folder/num/kebab-title
     const folder = path.dirname(node.fileAbsolutePath).match(/([^\/]*)\/*$/)[1]
     const kebabTitle = _.kebabCase(node.frontmatter.title)
-    // used to number the lessons
+    // used to number the articles
     const basename = path.basename(node.fileAbsolutePath, ".md")
 
     const slug = "/" + folder + "/" + kebabTitle

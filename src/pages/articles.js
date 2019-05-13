@@ -5,19 +5,19 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
 
-function LessonsIndex(props) {
+function ArticlesIndex(props) {
   const { data } = props
   const siteTitle = data.site.siteMetadata.title
-  const lessons = data.allMarkdownRemark.edges
+  const articles = data.allMarkdownRemark.edges
 
   return (
     <Layout location={props.location} title={siteTitle}>
       <SEO
-        title="All Lessons"
+        title="All Articles"
         keywords={[`blog`, `gatsby`, `javascript`, `react`]}
       />
 
-      {lessons.map(({ node }) => {
+      {articles.map(({ node }) => {
         const num = node.fields.basename
         const title = `${num}. ` + node.frontmatter.title
 
@@ -44,7 +44,7 @@ function LessonsIndex(props) {
   )
 }
 
-export default LessonsIndex
+export default ArticlesIndex
 
 export const pageQuery = graphql`
   query {
@@ -55,7 +55,7 @@ export const pageQuery = graphql`
     }
     allMarkdownRemark(
       sort: { fields: [fields___basename], order: ASC }
-      filter: { fields: { folder: { eq: "lessons" } } }
+      filter: { fields: { folder: { eq: "articles" } } }
     ) {
       edges {
         node {

@@ -13,7 +13,7 @@ http://www.shortguid.com/#/guid/uid-64
 
 ## Decisions
 
-- file basename used to order the lessons
+- file basename used to order the articles/cards/etc.
 
 ## Credits
 

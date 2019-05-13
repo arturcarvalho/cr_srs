@@ -14,10 +14,10 @@ import TagFilter from "../components/tagFilter"
 function CardsIndex(props) {
   const { data } = props
   const siteTitle = data.site.siteMetadata.title
-  const lessons = data.allMarkdownRemark.edges
+  const articles = data.allMarkdownRemark.edges
 
   let allTags = []
-  lessons.forEach(({ node }) => {
+  articles.forEach(({ node }) => {
     allTags = union(allTags, node.frontmatter.tags)
   })
 
@@ -32,7 +32,7 @@ function CardsIndex(props) {
 
       <TagFilter {...{ allTags, excludeTags, setExcludeTags }} />
 
-      {lessons.map(({ node }) => {
+      {articles.map(({ node }) => {
         const num = node.fields.basename
         const title = `${num}. ` + node.frontmatter.title
         const id = node.frontmatter.id

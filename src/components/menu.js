@@ -30,9 +30,9 @@ function Menu({ title }) {
               <Link
                 activeClassName="active-menu-item"
                 className="menu-nav-item"
-                to={"/lessons"}
+                to={"/articles"}
               >
-                Lessons
+                Articles
               </Link>
               <Link
                 activeClassName="active-menu-item"

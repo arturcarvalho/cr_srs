@@ -6,8 +6,8 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 
-function LessonsTemplate(props) {
-  const lesson = props.data.markdownRemark
+function ArticlesTemplate(props) {
+  const article = props.data.markdownRemark
   const siteTitle = props.data.site.siteMetadata.title
   // const { previous, next } = props.pageContext
   const { filteredCards } = props.pageContext
@@ -35,10 +35,10 @@ function LessonsTemplate(props) {
   return (
     <Layout location={props.location} title={siteTitle}>
       <SEO
-        title={lesson.frontmatter.title}
-        description={lesson.frontmatter.description || lesson.excerpt}
+        title={article.frontmatter.title}
+        description={article.frontmatter.description || article.excerpt}
       />
-      <h1>{lesson.frontmatter.title}</h1>
+      <h1>{article.frontmatter.title}</h1>
       <p
         style={{
           ...scale(-1 / 5),
@@ -47,9 +47,9 @@ function LessonsTemplate(props) {
           marginTop: rhythm(-1),
         }}
       >
-        {lesson.frontmatter.date}
+        {article.frontmatter.date}
       </p>
-      <div dangerouslySetInnerHTML={{ __html: lesson.html }} />
+      <div dangerouslySetInnerHTML={{ __html: article.html }} />
 
       {/*
       <ul
@@ -93,10 +93,10 @@ function LessonsTemplate(props) {
   )
 }
 
-export default LessonsTemplate
+export default ArticlesTemplate
 
 export const pageQuery = graphql`
-  query LessonsBySlug($slug: String!) {
+  query ArticlesBySlug($slug: String!) {
     file {
       sourceInstanceName
     }
