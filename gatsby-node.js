@@ -95,7 +95,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
     // janky way to build the url: /folder/num/kebab-title
     const folder = path.dirname(node.fileAbsolutePath).match(/([^\/]*)\/*$/)[1]
-    const kebabTitle = _.kebabCase(node.frontmatter.title)
+    const kebabTitle = _.kebabCase(node.frontmatter.title.toLowerCase())
     // used to number the articles
     const basename = path.basename(node.fileAbsolutePath, ".md")
 
