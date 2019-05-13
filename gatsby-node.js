@@ -110,7 +110,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     createNodeField({
       name: `basename`,
       node,
-      value: basename,
+      value: parseInt(basename),
     })
 
     createNodeField({
