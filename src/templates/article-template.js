@@ -80,6 +80,9 @@ function ArticlesTemplate(props) {
 
       {filteredCards.length > 0 && (
         <>
+          <br />
+
+          <hr />
           <h3>Training cards</h3>
           <div>{cards}</div>
         </>

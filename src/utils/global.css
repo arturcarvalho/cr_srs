@@ -58,6 +58,10 @@ body {
   margin-bottom: "10px";
 }
 
+.card-more {
+  margin: 15px 0;
+}
+
 .card-choice {
   background: var(--blue-color);
   color: var(--white-color);
@@ -138,7 +142,6 @@ body {
   display: flex;
   margin-bottom: 3em;
 }
-
 
 .home-left {
   flex: 2;

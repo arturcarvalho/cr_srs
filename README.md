@@ -14,7 +14,7 @@ http://www.shortguid.com/#/guid/uid-64
 ## Decisions
 
 - file basename used to order the articles/cards/etc.
-
+- Write Javascript instead of JavaScript on titles to avoid hiphens.
 ## Credits
 
 Used this image to create the logo: https://pixabay.com/illustrations/background-abstract-futuristic-1462755/

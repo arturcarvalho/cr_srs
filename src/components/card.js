@@ -64,7 +64,7 @@ function Card({
     <section className="card-container">
       <h3>
         <StatusBall isCorrect={isCorrect} />
-        Card {title}
+        {title}
       </h3>
       <div dangerouslySetInnerHTML={{ __html: html }} />
 
@@ -85,7 +85,7 @@ function Card({
           <input className="card-submit" type="submit" value="Answer" />
         </form>
       )}
-      <section>
+      <section className="card-more">
         Learn more: <MixedLink to={learnMoreUrl}>{learnMoreTitle}</MixedLink>
       </section>
     </section>

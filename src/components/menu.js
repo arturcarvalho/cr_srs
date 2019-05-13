@@ -39,7 +39,7 @@ function Menu({ title }) {
                 className="menu-nav-item"
                 to={"/cards"}
               >
-                Training
+                Cards
               </Link>
             </nav>
           </header>

@@ -4,7 +4,6 @@ import { graphql } from "gatsby"
 import CardContainer from "../components/cardContainer"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { rhythm } from "../utils/typography"
 
 function CardTemplate(props) {
   const card = props.data.markdownRemark
@@ -30,12 +29,6 @@ function CardTemplate(props) {
         description={card.frontmatter.description || card.excerpt}
       />
       <CardContainer {...cardArgs} />
-
-      <hr
-        style={{
-          marginBottom: rhythm(1),
-        }}
-      />
     </Layout>
   )
 }
