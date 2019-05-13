@@ -47,7 +47,7 @@ function ArticlesTemplate(props) {
           marginTop: rhythm(-1),
         }}
       >
-        {article.frontmatter.date}
+        {article.frontmatter.date} {` - ${article.timeToRead} min read`}
       </p>
       <div dangerouslySetInnerHTML={{ __html: article.html }} />
 
@@ -111,6 +111,7 @@ export const pageQuery = graphql`
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {
       id
+      timeToRead
       excerpt(pruneLength: 160)
       html
       frontmatter {
