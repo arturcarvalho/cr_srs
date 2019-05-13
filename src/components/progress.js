@@ -15,7 +15,7 @@ const Progress = ({ resetProgress, totalCards, correctCardsCount }) => {
   return (
     <>
       <h2>
-        Your progress ({correctCardsCount} / {totalCards}):
+        My progress ({correctCardsCount} / {totalCards}):
       </h2>
       <div className="progress-squares">{squares}</div>
 

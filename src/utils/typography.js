@@ -13,6 +13,9 @@ Wordpress2016.overrideThemeStyles = () => {
     "ul, ol": {
       marginLeft: "1em",
     },
+    "h1, h2, h3": {
+      marginTop: 0,
+    }
   }
 }
 
