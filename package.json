@@ -5,7 +5,7 @@
   "version": "0.0.1",
   "author": "Artur Carvalho <arturbelico@gmail.com>",
   "bugs": {
-    "url": "https://github.com/arturcarvalho/coderanx/gatsby/issues"
+    "url": "https://github.com/arturcarvalho/coderanx/issues"
   },
   "dependencies": {
     "gatsby": "^2.3.31",
@@ -25,11 +25,15 @@
     "gatsby-source-filesystem": "^2.0.32",
     "gatsby-transformer-remark": "^2.3.12",
     "gatsby-transformer-sharp": "^2.1.18",
+    "lodash.throttle": "^4.1.1",
+    "lodash.union": "^4.6.0",
     "prismjs": "^1.16.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.0",
+    "react-redux": "^7.0.3",
     "react-typography": "^0.16.19",
+    "redux": "^4.0.1",
     "typeface-merriweather": "0.0.72",
     "typeface-montserrat": "0.0.54",
     "typography": "^0.16.19",

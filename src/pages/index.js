@@ -1,51 +1,65 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
+import { connect } from "react-redux"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { rhythm } from "../utils/typography"
+import Progress from "../components/progress"
+import { resetProgress } from "../store/progressActions"
 
-class BlogIndex extends React.Component {
-  render() {
-    const { data } = this.props
-    const siteTitle = data.site.siteMetadata.title
-    const posts = data.allMarkdownRemark.edges
+function Index(props) {
+  const { data } = props
 
-    return (
-      <Layout location={this.props.location} title={siteTitle}>
-        <SEO
-          title="All posts"
-          keywords={[`blog`, `gatsby`, `javascript`, `react`]}
-        />
+  const siteTitle = data.site.siteMetadata.title
+  const cards = data.allMarkdownRemark.edges.map(el => el.node.frontmatter.id)
+  let correctCardsCount = 0
+  Object.keys(props.answersById).forEach(c => {
+    if (props.answersById[c].correct) correctCardsCount++
+  })
 
-        {posts.map(({ node }) => {
-          const title = node.frontmatter.title || node.fields.slug
-          return (
-            <div key={node.fields.slug}>
-              <h3
-                style={{
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
-                <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                  {title}
-                </Link>
-              </h3>
-              <small>{node.frontmatter.date}</small>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: node.frontmatter.description || node.excerpt,
-                }}
-              />
-            </div>
-          )
-        })}
-      </Layout>
-    )
+  const progressArgs = {
+    totalCards: cards.length,
+    correctCardsCount,
+    resetProgress: props.resetProgress,
+  }
+
+  return (
+    <Layout location={props.location} title={siteTitle}>
+      <SEO title="All cards" keywords={[`javascript`, `react`]} />
+
+      <section className="home">
+        <section className="home-left">
+          <h3>What?</h3>
+          <p>
+            Read some <b>articles</b>, <b>practice</b> a little bit.
+          </p>
+          <h3>Why?</h3>
+          <p>Less time googling, means more time coding. In theory.</p>
+        </section>
+        <section className="home-right">
+          <h2>
+            <i>
+              TODO <br />
+              BONUS TRAINING
+            </i>
+          </h2>
+        </section>
+      </section>
+      <Progress {...progressArgs} />
+    </Layout>
+  )
+}
+
+const mapState = state => {
+  return {
+    answersById: state.progress.answersById,
   }
 }
 
-export default BlogIndex
+export default connect(
+  mapState,
+  { resetProgress }
+)(Index)
 
 export const pageQuery = graphql`
   query {
@@ -54,17 +68,11 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(filter: { fields: { folder: { eq: "cards" } } }) {
       edges {
         node {
-          excerpt
-          fields {
-            slug
-          }
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            title
-            description
+            id
           }
         }
       }

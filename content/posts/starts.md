@@ -6,6 +6,7 @@ description: This is a custom description for SEO and Open Graph purposes, rathe
 
 The log, it is pretty nice.
 Testing netlify hook is deploying.
+Checking name change
 
 ```js
 var x = 0

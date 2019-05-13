@@ -5,3 +5,16 @@
 ```sh
 npm start
 ```
+
+## generate id for cards
+
+I'm just using this to generate ids. Still no idea how I could auto insert an id on the cards I'm generating. I'd need some kind of weird trigger onFileCreate or something. Looks like too much work for what is needed.
+http://www.shortguid.com/#/guid/uid-64
+
+## Decisions
+
+- file basename used to order the articles/cards/etc.
+
+## Credits
+
+Used this image to create the logo: https://pixabay.com/illustrations/background-abstract-futuristic-1462755/
