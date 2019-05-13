@@ -47,7 +47,7 @@ function CardsIndex(props) {
         const isCorrect = isCardCorrect(id, props.answersById)
 
         return (
-          <div key={node.fields.slug}>
+          <div className="cards-item" key={node.fields.slug}>
             <h3
               style={{
                 marginBottom: rhythm(1 / 4),
@@ -58,11 +58,6 @@ function CardsIndex(props) {
                 {title}
               </Link>
             </h3>
-            <p
-              dangerouslySetInnerHTML={{
-                __html: node.frontmatter.description || node.excerpt,
-              }}
-            />
           </div>
         )
       })}
