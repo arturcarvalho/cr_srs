@@ -15,6 +15,7 @@ body {
 .menu {
   background-color: var(--white-color);
   padding: 0.5em 0;
+  margin-bottom: 3em;
 }
 
 .menu-nav {
@@ -135,20 +136,18 @@ body {
 /* HOME */
 .home {
   display: flex;
-  margin-top: 3em;
   margin-bottom: 3em;
 }
 
-.home-left,
-.home-right {
-  flex: 1;
-}
+
 .home-left {
+  flex: 2;
   border-right: 1px solid var(--gray-color);
   padding-right: 20px;
 }
 
 .home-right {
+  flex: 1;
   margin-left: 30px;
   text-align: center;
   display: flex;
