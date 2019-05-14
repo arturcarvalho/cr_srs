@@ -75,36 +75,29 @@ export const pageQuery = graphql`
       }
     }
     cards: allMarkdownRemark(
-      filter: {
-        fields: { type: { eq: "cards" }, articleId: { eq: $articleId } }
-      }
+      filter: { fields: { type: { eq: "articles" }, id: { eq: $articleId } } }
     ) {
       edges {
         node {
-          excerpt
-          html
           fields {
-            cardId
-          }
-          frontmatter {
-            title
-            correct
-            choices
+            id
+            slug
           }
         }
       }
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {
-      timeToRead
       excerpt(pruneLength: 160)
       html
       fields {
-        slug
+        cardId
+        articleId
       }
       frontmatter {
+        choices
+        correct
         title
         date(formatString: "MMMM DD, YYYY")
-        description
       }
     }
   }

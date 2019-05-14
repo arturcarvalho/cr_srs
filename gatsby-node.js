@@ -12,7 +12,7 @@ exports.createPages = ({ graphql, actions }) => {
     `
       {
         allMarkdownRemark(
-          sort: { fields: [fields___order], order: ASC }
+          sort: { fields: [fields___id], order: ASC }
           limit: 1000
         ) {
           edges {
@@ -20,7 +20,7 @@ exports.createPages = ({ graphql, actions }) => {
               html
               fields {
                 slug
-                order
+                id
                 type
               }
               frontmatter {
@@ -53,11 +53,15 @@ exports.createPages = ({ graphql, actions }) => {
       if (page.node.fields.type === "cards") component = card
       if (page.node.fields.type === "articles") component = article
 
+      // Getting less hacky, but still over 9000. I need to improve my graphql
+      const articleId = "" + parseInt(page.node.fields.id)
+
       createPage({
         path: page.node.fields.slug,
         component,
         context: {
-          articleId: "" + page.node.fields.order, // null for posts
+          // context is used for arg in graphql
+          articleId, // NaN for posts
           slug: page.node.fields.slug,
           previous,
           next,
@@ -115,9 +119,9 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     })
 
     createNodeField({
-      name: `order`,
+      name: `id`,
       node,
-      value: parseInt(basename),
+      value: basename,
     })
 
     createNodeField({

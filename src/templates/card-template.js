@@ -9,15 +9,15 @@ function CardTemplate(props) {
   const card = props.data.markdownRemark
   const siteTitle = props.data.site.siteMetadata.title
 
-  // const id = card.frontmatter.id
+  const id = card.fields.cardId
 
+  const articleUrl = props.data.article.edges[0].node.fields.slug
   const cardArgs = {
-    tags: card.frontmatter.tags,
+    id,
     title: card.frontmatter.title,
-    // choices: card.frontmatter.choices,
-    // correct: card.frontmatter.correct,
-    // learnMoreUrl: card.frontmatter.learnMoreUrl,
-    // learnMoreTitle: card.frontmatter.learnMoreTitle,
+    choices: card.frontmatter.choices,
+    correct: card.frontmatter.correct,
+    learnMoreUrl: articleUrl,
     html: card.html,
   }
 
@@ -35,26 +35,37 @@ function CardTemplate(props) {
 export default CardTemplate
 
 export const pageQuery = graphql`
-  query CardsBySlug($slug: String!) {
-    file {
-      sourceInstanceName
-    }
+  query CardsBySlug($slug: String!, $articleId: String!) {
     site {
       siteMetadata {
         title
         author
       }
     }
+    article: allMarkdownRemark(
+      filter: { fields: { type: { eq: "articles" }, id: { eq: $articleId } } }
+    ) {
+      edges {
+        node {
+          fields {
+            id
+            slug
+          }
+        }
+      }
+    }
     markdownRemark(fields: { slug: { eq: $slug } }) {
       excerpt(pruneLength: 160)
       html
+      fields {
+        cardId
+        articleId
+      }
       frontmatter {
-        # choices
-        # correct
+        choices
+        correct
         title
         date(formatString: "MMMM DD, YYYY")
-        description
-        tags
       }
     }
   }

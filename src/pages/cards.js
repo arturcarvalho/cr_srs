@@ -33,7 +33,7 @@ function CardsIndex(props) {
       <TagFilter {...{ allTags, excludeTags, setExcludeTags }} />
 
       {articles.map(({ node }) => {
-        const num = node.fields.order
+        const num = node.fields.id
         const title = `${num}. ` + node.frontmatter.title
         // const id = node.frontmatter.id
         const tags = node.frontmatter.tags
@@ -84,7 +84,7 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(
-      sort: { fields: [fields___order], order: ASC }
+      sort: { fields: [fields___id], order: ASC }
       filter: { fields: { type: { eq: "cards" } } }
     ) {
       edges {
@@ -92,7 +92,7 @@ export const pageQuery = graphql`
           excerpt
           fields {
             slug
-            order
+            id
           }
           frontmatter {
             tags
