@@ -1,14 +1,23 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link, graphql } from "gatsby"
+import union from "lodash.union"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
+import TagFilter from "../components/tagFilter"
 
 function ArticlesIndex(props) {
   const { data } = props
   const siteTitle = data.site.siteMetadata.title
   const articles = data.allMarkdownRemark.edges
+
+  let allTags = []
+  articles.forEach(({ node }) => {
+    allTags = union(allTags, node.frontmatter.tags)
+  })
+
+  const [excludeTags, setExcludeTags] = useState([])
 
   return (
     <Layout location={props.location} title={siteTitle}>
@@ -17,9 +26,18 @@ function ArticlesIndex(props) {
         keywords={[`blog`, `gatsby`, `javascript`, `react`]}
       />
 
+      <TagFilter {...{ allTags, excludeTags, setExcludeTags }} />
+
       {articles.map(({ node }) => {
         const num = node.fields.id
         const title = `${num}. ` + node.frontmatter.title
+
+        const tags = node.frontmatter.tags
+
+        if (tags) {
+          const areAllExcluded = tags.some(t => excludeTags.includes(t))
+          if (areAllExcluded) return null
+        }
 
         return (
           <div key={node.fields.slug}>
@@ -69,6 +87,7 @@ export const pageQuery = graphql`
             date(formatString: "MMMM DD, YYYY")
             title
             description
+            tags
           }
         }
       }
