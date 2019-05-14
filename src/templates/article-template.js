@@ -1,16 +1,24 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { connect } from "react-redux"
 
 import CardContainer from "../components/cardContainer"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
+import StatusBall from "../components/statusBall"
+import showArticleStatus from "../utils/showArticleStatus"
 
 function ArticlesTemplate(props) {
   const article = props.data.markdownRemark
   const siteTitle = props.data.site.siteMetadata.title
 
   let cards = null
+
+  const statusColor = showArticleStatus(
+    props.data.cards.edges,
+    props.answersById
+  )
 
   cards = props.data.cards.edges.map(card => {
     const { html, frontmatter, fields } = card.node
@@ -33,7 +41,10 @@ function ArticlesTemplate(props) {
         title={article.frontmatter.title}
         description={article.frontmatter.description || article.excerpt}
       />
-      <h1>{article.frontmatter.title}</h1>
+      <h1>
+        <StatusBall statusColor={statusColor} />
+        {article.frontmatter.title}
+      </h1>
       <p
         style={{
           ...scale(-1 / 5),
@@ -64,7 +75,13 @@ function ArticlesTemplate(props) {
   )
 }
 
-export default ArticlesTemplate
+const mapState = state => {
+  return {
+    answersById: state.progress.answersById,
+  }
+}
+
+export default connect(mapState)(ArticlesTemplate)
 
 export const pageQuery = graphql`
   query ArticlesBySlug($slug: String!, $articleId: String!) {

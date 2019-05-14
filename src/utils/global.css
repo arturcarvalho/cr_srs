@@ -5,6 +5,7 @@
   --gray-color: #e2e2e2;
   --green-color: #00cc52;
   --red-color: #cc003d;
+  --orange-color: #ccad00;
 }
 
 body {
@@ -53,7 +54,7 @@ body {
 }
 
 /* CARD */
-.cards-item{
+.cards-item {
   margin-bottom: 15px;
 }
 
@@ -109,16 +110,22 @@ body {
   margin-right: 5px;
 }
 
-.empty-ball {
+.gray-ball {
   background: var(--gray-color);
 }
 
-.correct-ball {
+.green-ball {
   background: var(--green-color);
 }
-.incorrect-ball {
+
+.red-ball {
   background: var(--red-color);
 }
+
+.orange-ball {
+  background: var(--orange-color);
+}
+
 
 /* TAGS */
 .tag {

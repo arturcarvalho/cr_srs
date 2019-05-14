@@ -8,12 +8,14 @@ function Card({
   id,
   answer,
   isCorrect,
+  statusColor,
   correct,
   title,
   html,
   learnMoreUrl,
   choices,
 }) {
+  
   // Save answer locally, just to track when it's wrong.
   // This way, I can track the wrong answers only while the user is on the page.
   const [currentAnswer, localAnswer] = useState(null)
@@ -61,10 +63,11 @@ function Card({
     answer(id, inputAnswer, correct)
   }
 
+
   return (
     <section className="card-container">
       <h3>
-        <StatusBall isCorrect={isCorrect} />
+        <StatusBall statusColor={statusColor} />
         {title}
       </h3>
       <div dangerouslySetInnerHTML={{ __html: html }} />

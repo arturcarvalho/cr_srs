@@ -3,13 +3,21 @@ import { connect } from "react-redux"
 
 import Card from "./card"
 import { answer } from "../store/progressActions"
-import isCardCorrect from "../utils/isCardCorrect"
+
+const cardColor = (id, answersById) => {
+  const answer = answersById[id]
+
+  if (answer && answer.correct) return [answer.correct, "green"]
+  if (answer && !answer.correct) return [answer.correct, "red"]
+  return [null, "gray"]
+}
 
 const CardContainer = props => {
-  const isCorrect = isCardCorrect(props.id, props.answersById)
+  const [isCorrect, statusColor] = cardColor(props.id, props.answersById)
   const cardArgs = {
     ...props,
     isCorrect,
+    statusColor,
   }
   return <Card {...cardArgs} />
 }

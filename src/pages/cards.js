@@ -6,8 +6,6 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
 import { answer } from "../store/progressActions"
-import isCardCorrect from "../utils/isCardCorrect"
-import StatusBall from "../components/statusBall"
 
 function CardsIndex(props) {
   const { data } = props
@@ -23,10 +21,6 @@ function CardsIndex(props) {
 
       {articles.map(({ node }) => {
         const title = `${node.fields.articleId}. ${node.frontmatter.title}`
-        const id = node.fields.cardId
-
-        // DUPLICATING CODE HERE AND ON CARD CONTAINER. REFACTOR
-        const isCorrect = isCardCorrect(id, props.answersById)
 
         return (
           <div className="cards-item" key={node.fields.slug}>
@@ -36,7 +30,6 @@ function CardsIndex(props) {
               }}
             >
               <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                <StatusBall isCorrect={isCorrect} />
                 {title}
               </Link>
             </h3>
@@ -47,14 +40,9 @@ function CardsIndex(props) {
   )
 }
 
-const mapState = state => {
-  return {
-    answersById: state.progress.answersById,
-  }
-}
 
 export default connect(
-  mapState,
+  null,
   { answer }
 )(CardsIndex)
 
