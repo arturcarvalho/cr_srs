@@ -44,36 +44,21 @@ exports.createPages = ({ graphql, actions }) => {
     // Create all types of pages.
     const pages = result.data.allMarkdownRemark.edges
 
-    // I'm being hacky again, I'm getting all the card nodes so i can use them
-    // inside the articles. But I don't want to learn graphql just to do a join...
-    const cards = pages.filter(page => page.node.fields.type === "cards")
-
     pages.forEach((page, index) => {
       const previous = index === pages.length - 1 ? null : pages[index + 1].node
       const next = index === 0 ? null : pages[index - 1].node
 
       let component
-      let filteredCards = []
       if (page.node.fields.type === "posts") component = post
       if (page.node.fields.type === "cards") component = card
-      if (page.node.fields.type === "articles") {
-        component = article
-
-        // build list of card nodes from the ids on the article
-        if (page.node.frontmatter.cards) {
-          page.node.frontmatter.cards.forEach(cardId => {
-            const c = cards.find(card => card.node.frontmatter.id === cardId)
-            filteredCards.push(c.node)
-          })
-        }
-      }
+      if (page.node.fields.type === "articles") component = article
 
       createPage({
         path: page.node.fields.slug,
         component,
         context: {
+          articleId: "" + page.node.fields.order, // null for posts
           slug: page.node.fields.slug,
-          filteredCards,
           previous,
           next,
         },
@@ -98,16 +83,24 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     let type = lastFolder // used also for posts
     if (secondLastFolder === "articles") {
       const splitName = basename.split("-") // basename is 1 (article) or 1-1 (card)
-      console.log(1, basename, urlEnd)
 
       if (splitName.length === 2) {
-        console.log("c")
         type = "cards"
         urlEnd += `-${splitName[1]}`
+
+        createNodeField({
+          name: `articleId`,
+          node,
+          value: splitName[0],
+        })
+        createNodeField({
+          name: `cardId`,
+          node,
+          value: basename,
+        })
       }
 
       if (splitName.length === 1) {
-        console.log("a")
         type = "articles"
       }
     }
@@ -115,7 +108,6 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     // post/title OR card/title OR article/title
     const slug = "/" + type + "/" + makeTextSlugFriendly(urlEnd)
 
-    console.log(2, slug)
     createNodeField({
       name: `slug`,
       node,

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react"
+import { Link } from "gatsby"
 
-import MixedLink from "./mixedLink"
 import StatusBall from "./statusBall"
 
 function Card({
@@ -9,8 +9,7 @@ function Card({
   isCorrect,
   correct,
   title,
-  html,
-  learnMoreTitle,
+  html,  
   learnMoreUrl,
   choices,
 }) {
@@ -86,7 +85,7 @@ function Card({
         </form>
       )}
       <section className="card-more">
-        Learn more: <MixedLink to={learnMoreUrl}>{learnMoreTitle}</MixedLink>
+        <Link to={learnMoreUrl}>Learn more</Link>
       </section>
     </section>
   )

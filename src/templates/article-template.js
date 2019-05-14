@@ -9,29 +9,23 @@ import { rhythm, scale } from "../utils/typography"
 function ArticlesTemplate(props) {
   const article = props.data.markdownRemark
   const siteTitle = props.data.site.siteMetadata.title
-  // const { previous, next } = props.pageContext
-  const { filteredCards } = props.pageContext
 
-  // console.log(props.data.cards)
   let cards = null
 
-  if (filteredCards) {
-    cards = filteredCards.map(card => {
-      const { html, frontmatter } = card
+  cards = props.data.cards.edges.map(card => {
+    const { html, frontmatter, fields } = card.node
 
-      const cardArgs = {
-        id: frontmatter.id,
-        title: frontmatter.title,
-        learnMoreTitle: frontmatter.learnMoreTitle,
-        learnMoreUrl: frontmatter.learnMoreUrl,
-        correct: frontmatter.correct,
-        choices: frontmatter.choices,
-        html,
-      }
-
-      return <CardContainer key={card.frontmatter.id} {...cardArgs} />
-    })
-  }
+    const id = fields.cardId
+    const cardArgs = {
+      id,
+      title: frontmatter.title,
+      learnMoreUrl: article.fields.slug,
+      correct: frontmatter.correct,
+      choices: frontmatter.choices,
+      html,
+    }
+    return <CardContainer key={id} {...cardArgs} />
+  })
 
   return (
     <Layout location={props.location} title={siteTitle}>
@@ -52,34 +46,7 @@ function ArticlesTemplate(props) {
       </p>
       <div dangerouslySetInnerHTML={{ __html: article.html }} />
 
-      {/*
-      <ul
-        style={{
-          display: `flex`,
-          flexWrap: `wrap`,
-          justifyContent: `space-between`,
-          listStyle: `none`,
-          padding: 0,
-        }}
-      >
-       <li>
-            {previous && (
-              <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
-              </Link>
-            )}
-          </li>
-          <li>
-            {next && (
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
-              </Link>
-            )}
-          </li> 
-      </ul>
-      */}
-
-      {filteredCards.length > 0 && (
+      {cards.length > 0 && (
         <>
           <br />
 
@@ -100,10 +67,7 @@ function ArticlesTemplate(props) {
 export default ArticlesTemplate
 
 export const pageQuery = graphql`
-  query ArticlesBySlug($slug: String!) {
-    file {
-      sourceInstanceName
-    }
+  query ArticlesBySlug($slug: String!, $articleId: String!) {
     site {
       siteMetadata {
         title
@@ -111,25 +75,32 @@ export const pageQuery = graphql`
       }
     }
     cards: allMarkdownRemark(
-      sort: { fields: [fields___order], order: ASC }
-      filter: { fields: { type: { eq: "cards" } } }
+      filter: {
+        fields: { type: { eq: "cards" }, articleId: { eq: $articleId } }
+      }
     ) {
       edges {
         node {
           excerpt
+          html
           fields {
-            slug
-            order
-            type
+            cardId
+          }
+          frontmatter {
+            title
+            correct
+            choices
           }
         }
       }
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {
-      id
       timeToRead
       excerpt(pruneLength: 160)
       html
+      fields {
+        slug
+      }
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
