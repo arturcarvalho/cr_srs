@@ -15,21 +15,22 @@ function Card({
   learnMoreUrl,
   choices,
 }) {
-  
   // Save answer locally, just to track when it's wrong.
   // This way, I can track the wrong answers only while the user is on the page.
   const [currentAnswer, localAnswer] = useState(null)
   const [inputAnswer, changeInputAnswer] = useState("")
+  const [shuffledChoices, shufflechoices] = useState([])
   const inputRef = useRef()
   const inputId = "input" + id
   let choiceList = null
 
+  // componentDidMount look a like
   useEffect(() => {
+    shufflechoices(shuffleArray(choices)) 
     if (isCorrect) changeInputAnswer(correct)
   }, [])
 
   if (choices) {
-    const shuffledChoices =  shuffleArray(choices)
     choiceList = shuffledChoices.map(choice => {
       const cls = ["card-choice"]
 
@@ -62,7 +63,6 @@ function Card({
 
     answer(id, inputAnswer, correct)
   }
-
 
   return (
     <section className="card-container">
