@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react"
 import { Link } from "gatsby"
 
 import StatusBall from "./statusBall"
+import shuffleArray from "../utils/shuffleArray"
 
 function Card({
   id,
@@ -9,7 +10,7 @@ function Card({
   isCorrect,
   correct,
   title,
-  html,  
+  html,
   learnMoreUrl,
   choices,
 }) {
@@ -26,7 +27,8 @@ function Card({
   }, [])
 
   if (choices) {
-    choiceList = choices.map(choice => {
+    const shuffledChoices =  shuffleArray(choices)
+    choiceList = shuffledChoices.map(choice => {
       const cls = ["card-choice"]
 
       if (isCorrect && choice === correct) cls.push("correct-card-choice")
