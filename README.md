@@ -11,9 +11,19 @@ npm start
 I'm just using this to generate ids. Still no idea how I could auto insert an id on the cards I'm generating. I'd need some kind of weird trigger onFileCreate or something. Looks like too much work for what is needed.
 http://www.shortguid.com/#/guid/uid-64
 
+
 ## Decisions
 
 - file basename used to order the articles/cards/etc.
+- Having the cards independent seems like a bad idea, so I'm making them dependent on articles. That way there's no need to manage IDs or learn more links. Every card has an article associated with it. Even if it's a stub.
+
+
+## Structure
+
+- article 1.md is stored inside folder articles/1.
+- the basename of the article is used as the order field.
+- the 1-n.md files inside the articles/1 folder are the cards associated with article 1.md.
+
 
 ## Credits
 

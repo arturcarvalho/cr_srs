@@ -9,16 +9,15 @@ function CardTemplate(props) {
   const card = props.data.markdownRemark
   const siteTitle = props.data.site.siteMetadata.title
 
-  const id = card.frontmatter.id
+  // const id = card.frontmatter.id
 
   const cardArgs = {
-    id,
     tags: card.frontmatter.tags,
     title: card.frontmatter.title,
-    choices: card.frontmatter.choices,
-    correct: card.frontmatter.correct,
-    learnMoreUrl: card.frontmatter.learnMoreUrl,
-    learnMoreTitle: card.frontmatter.learnMoreTitle,
+    // choices: card.frontmatter.choices,
+    // correct: card.frontmatter.correct,
+    // learnMoreUrl: card.frontmatter.learnMoreUrl,
+    // learnMoreTitle: card.frontmatter.learnMoreTitle,
     html: card.html,
   }
 
@@ -47,15 +46,11 @@ export const pageQuery = graphql`
       }
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {
-      id
       excerpt(pruneLength: 160)
       html
       frontmatter {
-        id
-        learnMoreUrl
-        learnMoreTitle
-        choices
-        correct
+        # choices
+        # correct
         title
         date(formatString: "MMMM DD, YYYY")
         description

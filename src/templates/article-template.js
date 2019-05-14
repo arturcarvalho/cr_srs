@@ -12,6 +12,7 @@ function ArticlesTemplate(props) {
   // const { previous, next } = props.pageContext
   const { filteredCards } = props.pageContext
 
+  // console.log(props.data.cards)
   let cards = null
 
   if (filteredCards) {
@@ -107,6 +108,21 @@ export const pageQuery = graphql`
       siteMetadata {
         title
         author
+      }
+    }
+    cards: allMarkdownRemark(
+      sort: { fields: [fields___order], order: ASC }
+      filter: { fields: { type: { eq: "cards" } } }
+    ) {
+      edges {
+        node {
+          excerpt
+          fields {
+            slug
+            order
+            type
+          }
+        }
       }
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {

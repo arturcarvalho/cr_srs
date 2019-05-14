@@ -18,7 +18,7 @@ function ArticlesIndex(props) {
       />
 
       {articles.map(({ node }) => {
-        const num = node.fields.basename
+        const num = node.fields.order
         const title = `${num}. ` + node.frontmatter.title
 
         return (
@@ -54,15 +54,15 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(
-      sort: { fields: [fields___basename], order: ASC }
-      filter: { fields: { folder: { eq: "articles" } } }
+      sort: { fields: [fields___order], order: ASC }
+      filter: { fields: { type: { eq: "articles" } } }
     ) {
       edges {
         node {
           excerpt
           fields {
             slug
-            basename
+            order
           }
           frontmatter {
             date(formatString: "MMMM DD, YYYY")

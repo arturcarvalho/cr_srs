@@ -33,9 +33,9 @@ function CardsIndex(props) {
       <TagFilter {...{ allTags, excludeTags, setExcludeTags }} />
 
       {articles.map(({ node }) => {
-        const num = node.fields.basename
+        const num = node.fields.order
         const title = `${num}. ` + node.frontmatter.title
-        const id = node.frontmatter.id
+        // const id = node.frontmatter.id
         const tags = node.frontmatter.tags
 
         if (tags) {
@@ -44,7 +44,7 @@ function CardsIndex(props) {
         }
 
         // DUPLICATING CODE HERE AND ON CARD CONTAINER. REFACTOR
-        const isCorrect = isCardCorrect(id, props.answersById)
+        const isCorrect = false; //isCardCorrect(id, props.answersById)
 
         return (
           <div className="cards-item" key={node.fields.slug}>
@@ -84,18 +84,17 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(
-      sort: { fields: [fields___basename], order: ASC }
-      filter: { fields: { folder: { eq: "cards" } } }
+      sort: { fields: [fields___order], order: ASC }
+      filter: { fields: { type: { eq: "cards" } } }
     ) {
       edges {
         node {
           excerpt
           fields {
             slug
-            basename
+            order
           }
           frontmatter {
-            id
             tags
             date(formatString: "MMMM DD, YYYY")
             title
