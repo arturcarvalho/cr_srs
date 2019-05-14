@@ -1,11 +1,14 @@
 import React, { useState } from "react"
 import { Link, graphql } from "gatsby"
 import union from "lodash.union"
+import { connect } from "react-redux"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
 import TagFilter from "../components/tagFilter"
+import StatusBall from "../components/statusBall"
+import showArticleStatus from "../utils/showArticleStatus"
 
 function ArticlesIndex(props) {
   const { data } = props
@@ -29,8 +32,14 @@ function ArticlesIndex(props) {
       <TagFilter {...{ allTags, excludeTags, setExcludeTags }} />
 
       {articles.map(({ node }) => {
-        const num = node.fields.id
-        const title = `${num}. ` + node.frontmatter.title
+        const id = node.fields.id
+        const title = `${id}. ` + node.frontmatter.title
+
+        const articleCards = data.cards.edges.filter(
+          c => c.node.fields.articleId === id
+        )
+
+        const statusColor = showArticleStatus(articleCards, props.answersById)
 
         const tags = node.frontmatter.tags
 
@@ -47,6 +56,7 @@ function ArticlesIndex(props) {
               }}
             >
               <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
+                <StatusBall statusColor={statusColor} />
                 {title}
               </Link>
             </h3>
@@ -62,13 +72,32 @@ function ArticlesIndex(props) {
   )
 }
 
-export default ArticlesIndex
+const mapState = state => {
+  return {
+    answersById: state.progress.answersById,
+  }
+}
+
+export default connect(mapState)(ArticlesIndex)
 
 export const pageQuery = graphql`
-  query {
+  query ArticlesQuery {
     site {
       siteMetadata {
         title
+      }
+    }
+    cards: allMarkdownRemark(
+      sort: { fields: [fields___order], order: ASC }
+      filter: { fields: { type: { eq: "cards" } } }
+    ) {
+      edges {
+        node {
+          fields {
+            id
+            articleId
+          }
+        }
       }
     }
     allMarkdownRemark(
