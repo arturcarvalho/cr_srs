@@ -15,6 +15,7 @@ function ArticlesTemplate(props) {
   cards = props.data.cards.edges.map(card => {
     const { html, frontmatter, fields } = card.node
 
+    console.log(frontmatter.correct)
     const id = fields.id
     const cardArgs = {
       id,
@@ -90,6 +91,7 @@ export const pageQuery = graphql`
           frontmatter {
             title
             choices
+            correct
           }
         }
       }
