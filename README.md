@@ -20,8 +20,10 @@ http://www.shortguid.com/#/guid/uid-64
 
 ## Structure
 
+- the basename of the article is used as the order field and the if field. I haven't found a way to accept Int! on the graphql queries, so I just created both.
+
+
 - article 1.md is stored inside folder articles/1.
-- the basename of the article is used as the order field.
 - the 1-n.md files inside the articles/1 folder are the cards associated with article 1.md.
 
 
