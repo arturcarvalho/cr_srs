@@ -89,7 +89,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
       if (splitName.length === 2) {
         type = "cards"
-        urlEnd += `-${splitName[1]}`
+        urlEnd = `${basename}-${urlEnd}`
 
         createNodeField({
           name: `articleId`,
