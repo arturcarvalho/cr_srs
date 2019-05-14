@@ -35,7 +35,7 @@ function CardsIndex(props) {
       {articles.map(({ node }) => {
         const num = node.fields.id
         const title = `${num}. ` + node.frontmatter.title
-        // const id = node.frontmatter.id
+        const id = node.fields.cardId
         const tags = node.frontmatter.tags
 
         if (tags) {
@@ -44,7 +44,7 @@ function CardsIndex(props) {
         }
 
         // DUPLICATING CODE HERE AND ON CARD CONTAINER. REFACTOR
-        const isCorrect = false; //isCardCorrect(id, props.answersById)
+        const isCorrect = isCardCorrect(id, props.answersById)
 
         return (
           <div className="cards-item" key={node.fields.slug}>
@@ -92,7 +92,7 @@ export const pageQuery = graphql`
           excerpt
           fields {
             slug
-            id
+            cardId
           }
           frontmatter {
             tags
