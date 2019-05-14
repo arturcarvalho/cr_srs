@@ -56,11 +56,11 @@ exports.createPages = ({ graphql, actions }) => {
       // Getting less hacky, but still over 9000. I need to improve my graphql
       const articleId = "" + parseInt(page.node.fields.id)
 
+      // context prop is used for args in graphql
       createPage({
         path: page.node.fields.slug,
         component,
         context: {
-          // context is used for arg in graphql
           articleId, // NaN for posts
           slug: page.node.fields.slug,
           previous,

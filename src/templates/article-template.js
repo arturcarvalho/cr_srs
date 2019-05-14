@@ -15,7 +15,7 @@ function ArticlesTemplate(props) {
   cards = props.data.cards.edges.map(card => {
     const { html, frontmatter, fields } = card.node
 
-    const id = fields.cardId
+    const id = fields.id
     const cardArgs = {
       id,
       title: frontmatter.title,
@@ -75,13 +75,21 @@ export const pageQuery = graphql`
       }
     }
     cards: allMarkdownRemark(
-      filter: { fields: { type: { eq: "articles" }, id: { eq: $articleId } } }
+      filter: {
+        fields: { type: { eq: "cards" }, articleId: { eq: $articleId } }
+      }
     ) {
       edges {
         node {
+          html
           fields {
             id
             slug
+            articleId
+          }
+          frontmatter {
+            title
+            choices
           }
         }
       }
@@ -90,6 +98,7 @@ export const pageQuery = graphql`
       excerpt(pruneLength: 160)
       html
       fields {
+        slug
         cardId
         articleId
       }
