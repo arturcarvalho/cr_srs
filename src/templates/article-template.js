@@ -75,6 +75,7 @@ export const pageQuery = graphql`
       }
     }
     cards: allMarkdownRemark(
+      sort: { fields: [fields___order], order: ASC }
       filter: {
         fields: { type: { eq: "cards" }, articleId: { eq: $articleId } }
       }

@@ -53,8 +53,7 @@ exports.createPages = ({ graphql, actions }) => {
       if (page.node.fields.type === "cards") component = card
       if (page.node.fields.type === "articles") component = article
 
-      // Getting less hacky, but still over 9000. I need to improve my graphql
-      const articleId = "" + parseInt(page.node.fields.id)
+      const articleId = "" + parseInt(page.node.fields.id) // 1-1 => 1
 
       // context prop is used for args in graphql
       createPage({
@@ -120,6 +119,12 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
     createNodeField({
       name: `id`,
+      node,
+      value: basename,
+    })
+
+    createNodeField({
+      name: `order`,
       node,
       value: basename,
     })
