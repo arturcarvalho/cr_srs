@@ -4,24 +4,24 @@ import { connect } from "react-redux"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-// import Progress from "../components/progress"
+import Progress from "../components/progress"
 import { resetProgress } from "../store/progressActions"
 
 function Index(props) {
   const { data } = props
 
   const siteTitle = data.site.siteMetadata.title
-  // const cards = data.allMarkdownRemark.edges.map(el => el.node.frontmatter.id)
-  // let correctCardsCount = 0
-  // Object.keys(props.answersById).forEach(c => {
-  //   if (props.answersById[c].correct) correctCardsCount++
-  // })
+  const cards = data.allMarkdownRemark.edges.map(el => el.node.frontmatter.id)
+  let correctCardsCount = 0
+  Object.keys(props.answersById).forEach(c => {
+    if (props.answersById[c].correct) correctCardsCount++
+  })
 
-  // const progressArgs = {
-  //   totalCards: cards.length,
-  //   correctCardsCount,
-  //   resetProgress: props.resetProgress,
-  // }
+  const progressArgs = {
+    totalCards: cards.length,
+    correctCardsCount,
+    resetProgress: props.resetProgress,
+  }
 
   return (
     <Layout location={props.location} title={siteTitle}>
@@ -45,7 +45,7 @@ function Index(props) {
           </h2>
         </section>
       </section>
-      {/* <Progress {...progressArgs} /> */}
+      <Progress {...progressArgs} />
     </Layout>
   )
 }
