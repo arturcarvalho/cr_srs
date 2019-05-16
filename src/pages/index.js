@@ -34,7 +34,7 @@ function Index(props) {
             Read some <b>articles</b>, <b>practice</b> a little bit.
           </p>
           <h3>Why?</h3>
-          <p>Less time googling, means more time coding. In theory.</p>
+          <p>Less time googling means more time coding. Maybe.</p>
         </section>
         <section className="home-right">
           <h2>
