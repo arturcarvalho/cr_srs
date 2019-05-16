@@ -26,7 +26,8 @@ function Card({
 
   // componentDidMount look a like
   useEffect(() => {
-    shufflechoices(shuffleArray(choices)) 
+    // can't put an if in case it's an input card. need to check this.
+    shufflechoices(shuffleArray(choices))
     if (isCorrect) changeInputAnswer(correct)
   }, [])
 

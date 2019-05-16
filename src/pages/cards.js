@@ -20,8 +20,6 @@ function CardsIndex(props) {
       />
 
       {articles.map(({ node }) => {
-        const title = `${node.fields.articleId}. ${node.frontmatter.title}`
-
         return (
           <div className="cards-item" key={node.fields.slug}>
             <h3
@@ -30,7 +28,7 @@ function CardsIndex(props) {
               }}
             >
               <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                {title}
+                {node.frontmatter.title}
               </Link>
             </h3>
           </div>
@@ -39,7 +37,6 @@ function CardsIndex(props) {
     </Layout>
   )
 }
-
 
 export default connect(
   null,
@@ -54,23 +51,19 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(
-      sort: { fields: [fields___order], order: ASC }
+      sort: { fields: [frontmatter___date], order: DESC }
       filter: { fields: { type: { eq: "cards" } } }
     ) {
       edges {
         node {
-          excerpt
           fields {
-            order
             slug
             cardId
             articleId
           }
           frontmatter {
-            tags
             date(formatString: "MMMM DD, YYYY")
             title
-            description
           }
         }
       }

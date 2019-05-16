@@ -33,7 +33,6 @@ function ArticlesIndex(props) {
 
       {articles.map(({ node }) => {
         const id = node.fields.id
-        const title = `${id}. ` + node.frontmatter.title
 
         const articleCards = data.cards.edges.filter(
           c => c.node.fields.articleId === id
@@ -49,23 +48,26 @@ function ArticlesIndex(props) {
         }
 
         return (
-          <div key={node.fields.slug}>
-            <h3
-              style={{
-                marginBottom: rhythm(1 / 4),
-              }}
-            >
-              <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                <StatusBall statusColor={statusColor} />
-                {title}
-              </Link>
-            </h3>
+          <section key={node.fields.slug}>
+            <header>
+              <h3
+                style={{
+                  marginBottom: rhythm(1 / 4),
+                }}
+              >
+                <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
+                  <StatusBall statusColor={statusColor} />
+                  {node.frontmatter.title}
+                </Link>
+              </h3>
+              <small>{node.frontmatter.date}</small>
+            </header>
             <p
               dangerouslySetInnerHTML={{
                 __html: node.frontmatter.description || node.excerpt,
               }}
             />
-          </div>
+          </section>
         )
       })}
     </Layout>
@@ -88,7 +90,7 @@ export const pageQuery = graphql`
       }
     }
     cards: allMarkdownRemark(
-      sort: { fields: [fields___order], order: ASC }
+      sort: { fields: [frontmatter___date], order: DESC }
       filter: { fields: { type: { eq: "cards" } } }
     ) {
       edges {
@@ -101,7 +103,7 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(
-      sort: { fields: [fields___order], order: ASC }
+      sort: { fields: [frontmatter___date], order: DESC }
       filter: { fields: { type: { eq: "articles" } } }
     ) {
       edges {
@@ -109,7 +111,6 @@ export const pageQuery = graphql`
           excerpt
           fields {
             slug
-            order
             id
           }
           frontmatter {

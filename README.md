@@ -14,13 +14,10 @@ http://www.shortguid.com/#/guid/uid-64
 
 ## Decisions
 
-- file basename used to order the articles/cards/etc.
 - Having the cards independent seems like a bad idea, so I'm making them dependent on articles. That way there's no need to manage IDs or learn more links. Every card has an article associated with it. Even if it's a stub.
 
 
 ## Structure
-
-- the basename of the article is used as the order field and the if field. I haven't found a way to accept Int! on the graphql queries, so I just created both.
 
 
 - article 1.md is stored inside folder articles/1.

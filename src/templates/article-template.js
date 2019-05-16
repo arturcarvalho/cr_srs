@@ -92,7 +92,7 @@ export const pageQuery = graphql`
       }
     }
     cards: allMarkdownRemark(
-      sort: { fields: [fields___order], order: ASC }
+      sort: { fields: [frontmatter___date], order: DESC }
       filter: {
         fields: { type: { eq: "cards" }, articleId: { eq: $articleId } }
       }
@@ -122,8 +122,6 @@ export const pageQuery = graphql`
         articleId
       }
       frontmatter {
-        choices
-        correct
         title
         date(formatString: "MMMM DD, YYYY")
       }

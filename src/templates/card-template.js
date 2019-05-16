@@ -62,8 +62,8 @@ export const pageQuery = graphql`
         articleId
       }
       frontmatter {
-        choices
         correct
+        choices
         title
         date(formatString: "MMMM DD, YYYY")
       }

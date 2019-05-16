@@ -1,6 +1,8 @@
 // Fisher-Yates Shuffle
 // https://stackoverflow.com/a/2450976
 const shuffleArray = array => {
+  if (!array) return null
+
   var currentIndex = array.length,
     temporaryValue,
     randomIndex

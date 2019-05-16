@@ -80,7 +80,6 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
       if (splitName.length === 2) {
         type = "cards"
-        urlEnd = `${basename}-${urlEnd}`
 
         createNodeField({
           name: `articleId`,
@@ -99,8 +98,9 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       }
     }
 
-    // post/title OR card/title OR article/title
-    const slug = "/" + type + "/" + makeTextSlugFriendly(urlEnd)
+    // post/title OR card/1-1/title OR article/1/title
+    const slug =
+      "/" + type + "/" + basename + "/" + makeTextSlugFriendly(urlEnd)
 
     createNodeField({
       name: `slug`,
@@ -110,12 +110,6 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
     createNodeField({
       name: `id`,
-      node,
-      value: basename,
-    })
-
-    createNodeField({
-      name: `order`,
       node,
       value: basename,
     })
