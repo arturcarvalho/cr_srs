@@ -29,12 +29,11 @@ function Index(props) {
 
       <section className="home">
         <section className="home-left">
-          <h3>What?</h3>
+          <h1>What is this?</h1>
           <p>
-            Read some <b>articles</b>, <b>practice</b> a little bit.
+            A site with <b>articles</b>, that have <b>exercises</b> that are
+            being <b>tracked</b>.
           </p>
-          <h3>Why?</h3>
-          <p>Less time googling means more time coding. Maybe.</p>
         </section>
         <section className="home-right">
           <h2>
