@@ -1,5 +1,5 @@
 import actionTypes from "./actionTypes"
-
+import { defaultCard } from "../utils/sm2"
 /**
  * SHAPE
  *   cardsById: {
@@ -24,7 +24,7 @@ function cards(state = initialState, action) {
         ...state,
         cardsById: {
           ...state.cardsById,
-          [action.id]: null,
+          [action.id]: defaultCard,
         },
       }
 
