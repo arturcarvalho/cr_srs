@@ -31,8 +31,8 @@ function Index(props) {
         <section className="home-left">
           <h1>What is this?</h1>
           <p>
-            A site with <b>articles</b>, that have <b>exercises</b> that are
-            being <b>tracked</b>.
+            A site with tech <b>articles</b>, each with <b>exercises</b> that
+            are <b>tracked</b>.
           </p>
         </section>
         <section className="home-right">
