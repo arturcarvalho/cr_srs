@@ -17,7 +17,7 @@ function ArticlesTemplate(props) {
 
   const statusColor = showArticleStatus(
     props.data.cards.edges,
-    props.answersById
+    props.cardsById
   )
 
   cards = props.data.cards.edges.map(card => {
@@ -77,7 +77,7 @@ function ArticlesTemplate(props) {
 
 const mapState = state => {
   return {
-    answersById: state.progress.answersById,
+    cardsById: state.progress.cardsById,
   }
 }
 

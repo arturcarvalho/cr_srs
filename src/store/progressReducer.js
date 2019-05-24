@@ -2,13 +2,13 @@ import actionTypes from "./actionTypes"
 
 /**
  * SHAPE
- *   answersById: {
+ *   cardsById: {
  *    "1-1": { correct: false },
  * },
  */
 
 const initialState = {
-  answersById: {},
+  cardsById: {},
 }
 
 function progress(state = initialState, action) {
@@ -18,12 +18,12 @@ function progress(state = initialState, action) {
       if (action.correct !== action.answer) return state
 
       // don't change if it's already in the list
-      if (action.id in state.answersById) return state
+      if (action.id in state.cardsById) return state
 
       return {
         ...state,
-        answersById: {
-          ...state.answersById,
+        cardsById: {
+          ...state.cardsById,
           [action.id]: null,
         },
       }

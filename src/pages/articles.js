@@ -38,7 +38,7 @@ function ArticlesIndex(props) {
           c => c.node.fields.articleId === id
         )
 
-        const statusColor = showArticleStatus(articleCards, props.answersById)
+        const statusColor = showArticleStatus(articleCards, props.cardsById)
 
         const tags = node.frontmatter.tags
 
@@ -76,7 +76,7 @@ function ArticlesIndex(props) {
 
 const mapState = state => {
   return {
-    answersById: state.progress.answersById,
+    cardsById: state.progress.cardsById,
   }
 }
 

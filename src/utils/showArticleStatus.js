@@ -1,8 +1,8 @@
-const showArticleStatus = (cards, answersById) => {
+const showArticleStatus = (cards, cardsById) => {
   const articleCards = cards.map(c => c.node.fields.id)
 
   const correctCards = articleCards.reduce((tot, cardId) => {
-    return cardId in answersById ? tot + 1 : tot
+    return cardId in cardsById ? tot + 1 : tot
   }, 0)
 
   if (articleCards.length === correctCards) return "green" // all cards correct
