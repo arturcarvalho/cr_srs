@@ -91,6 +91,7 @@ body {
 
 .incorrect-card-choice {
   background-color: var(--red-color);
+  color: var(--white-color);
 }
 
 .card-input {
