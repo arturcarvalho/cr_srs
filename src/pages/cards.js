@@ -5,7 +5,7 @@ import { connect } from "react-redux"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
-import { answer } from "../store/progressActions"
+import { answer } from "../store/cardsActions"
 
 function CardsIndex(props) {
   const { data } = props

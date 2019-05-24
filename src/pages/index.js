@@ -5,7 +5,7 @@ import { connect } from "react-redux"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Progress from "../components/progress"
-import { resetProgress } from "../store/progressActions"
+import { resetProgress } from "../store/cardsActions"
 
 function Index(props) {
   const { data } = props
