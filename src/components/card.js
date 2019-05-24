@@ -54,6 +54,8 @@ function Card({
     })
   }
 
+  // else it's an input
+
   useEffect(() => {
     if (!choiceList) inputRef.current.focus()
   }, [])

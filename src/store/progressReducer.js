@@ -3,7 +3,7 @@ import actionTypes from "./actionTypes"
 /**
  * SHAPE
  *   answersById: {
- *    VDs4rKJnb: { correct: false },
+ *    "1-1": { correct: false },
  * },
  */
 
@@ -14,11 +14,17 @@ const initialState = {
 function progress(state = initialState, action) {
   switch (action.type) {
     case actionTypes.ANSWER:
+      // don't add if it's wrong
+      if (action.correct !== action.answer) return state
+
+      // don't change if it's already in the list
+      if (action.id in state.answersById) return state
+
       return {
         ...state,
         answersById: {
           ...state.answersById,
-          [action.id]: { correct: action.correct === action.answer },
+          [action.id]: null,
         },
       }
 

@@ -12,10 +12,7 @@ function Index(props) {
 
   const siteTitle = data.site.siteMetadata.title
   const cards = data.allMarkdownRemark.edges.map(el => el.node.frontmatter.id)
-  let correctCardsCount = 0
-  Object.keys(props.answersById).forEach(c => {
-    if (props.answersById[c].correct) correctCardsCount++
-  })
+  let correctCardsCount = Object.keys(props.answersById).length
 
   const progressArgs = {
     totalCards: cards.length,

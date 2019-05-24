@@ -5,10 +5,7 @@ import Card from "./card"
 import { answer } from "../store/progressActions"
 
 const cardColor = (id, answersById) => {
-  const answer = answersById[id]
-
-  if (answer && answer.correct) return [answer.correct, "green"]
-  if (answer && !answer.correct) return [answer.correct, "red"]
+  if (id in answersById) return [true, "green"]
   return [null, "gray"]
 }
 
@@ -19,6 +16,7 @@ const CardContainer = props => {
     isCorrect,
     statusColor,
   }
+
   return <Card {...cardArgs} />
 }
 
