@@ -1,4 +1,4 @@
 import { combineReducers } from "redux"
-import progress from "./progressReducer"
+import cards from "./cardsReducer"
 
-export default combineReducers({ progress })
+export default combineReducers({ cards })

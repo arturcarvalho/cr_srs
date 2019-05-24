@@ -76,7 +76,7 @@ function ArticlesIndex(props) {
 
 const mapState = state => {
   return {
-    cardsById: state.progress.cardsById,
+    cardsById: state.cards.cardsById,
   }
 }
 

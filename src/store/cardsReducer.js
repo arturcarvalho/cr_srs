@@ -11,7 +11,7 @@ const initialState = {
   cardsById: {},
 }
 
-function progress(state = initialState, action) {
+function cards(state = initialState, action) {
   switch (action.type) {
     case actionTypes.ANSWER:
       // don't add if it's wrong
@@ -36,4 +36,4 @@ function progress(state = initialState, action) {
   }
 }
 
-export default progress
+export default cards
