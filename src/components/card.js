@@ -73,7 +73,7 @@ function Card({
       </h3>
       <div dangerouslySetInnerHTML={{ __html: html }} />
 
-      {choiceList && choiceList}
+      {choiceList && <div className="card-choices">{choiceList}</div>}
       {!choiceList && (
         <form onSubmit={handleSubmit}>
           <input
