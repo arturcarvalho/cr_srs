@@ -15,6 +15,10 @@ body {
   background-color: var(--white-color);
 }
 
+.article-title {
+  margin-left: .5em;
+}
+
 /* MENU */
 .menu {
   background-color: var(--white-color);

@@ -43,7 +43,7 @@ function ArticlesTemplate(props) {
       />
       <h1>
         <StatusBall statusColor={statusColor} />
-        {article.frontmatter.title}
+        <span className="article-title">{article.frontmatter.title}</span>
       </h1>
       <p
         style={{
