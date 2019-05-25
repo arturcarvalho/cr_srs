@@ -10,6 +10,7 @@ function calculateEasiness(easiness, grade) {
 
 function getNextPracticeDate(days) {
   let now = new Date()
+  now.setHours(0, 0, 0, 0)
   now.setDate(now.getDate() + days)
   return now
 }
