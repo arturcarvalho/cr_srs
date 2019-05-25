@@ -14,11 +14,11 @@ http://www.shortguid.com/#/guid/uid-64
 
 ## Decisions
 
+- Not doing tests yet, the idea is still not consolidated.
 - Having the cards independent seems like a bad idea, so I'm making them dependent on articles. That way there's no need to manage IDs or learn more links. Every card has an article associated with it. Even if it's a stub.
 
 
 ## Structure
-
 
 - article 1.md is stored inside folder articles/1.
 - the 1-n.md files inside the articles/1 folder are the cards associated with article 1.md.
