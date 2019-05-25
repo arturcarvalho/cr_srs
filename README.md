@@ -27,4 +27,6 @@ http://www.shortguid.com/#/guid/uid-64
 
 ## Credits
 
+arrow: https://iconmonstr.com/arrow-24-svg/
+
 Used this image to create the logo: https://pixabay.com/illustrations/background-abstract-futuristic-1462755/

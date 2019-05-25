@@ -25,7 +25,7 @@ function ArticlesTemplate(props) {
     const cardArgs = {
       answer: props.answer,
       cardsById: props.cardsById,
-      collapsed: true,
+      expanded: false,
       id,
       title: frontmatter.title,
       correct: frontmatter.correct,
@@ -58,19 +58,11 @@ function ArticlesTemplate(props) {
       <div dangerouslySetInnerHTML={{ __html: article.html }} />
 
       {cards.length > 0 && (
-        <>
-          <br />
-
-          <hr />
-          <h3>Training cards</h3>
-          <div>{cards}</div>
-        </>
+        <section>
+          <h1>Training</h1>
+          {cards}
+        </section>
       )}
-      <hr
-        style={{
-          marginBottom: rhythm(1),
-        }}
-      />
     </Layout>
   )
 }

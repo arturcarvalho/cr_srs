@@ -1,8 +1,36 @@
 .container {
-  padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 1.5em;
 }
 
-.container h1 {
+.header {
+  display: flex;
+  align-items: center;
+
+  background-color: var(--black-color);
+  color: var(--white-color);
+  font-weight: bold;
   font-size: 1.5em;
+  padding: 5px 10px;
+  border-radius: var(--round-corners);
+  cursor: pointer;
+}
+
+.expanded {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.title {
+  font-family: var(--sans-font);
+  flex: 1;
+  font-size: 18px;
+}
+
+.body {
+  padding: 15px;
+  border-left: 1px solid var(--black-color);
+  border-right: 1px solid var(--black-color);
+  border-bottom: 1px solid var(--black-color);
+  border-bottom-left-radius: var(--round-corners);
+  border-bottom-right-radius: var(--round-corners);
 }

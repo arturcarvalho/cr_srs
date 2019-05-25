@@ -7,6 +7,8 @@
   --green-color: #00cc52;
   --red-color: #cc003d;
   --orange-color: #e5e500;
+  --sans-font: Montserrat, sans-serif;
+  --round-corners: 3px;
 }
 
 body {
@@ -92,7 +94,7 @@ body {
   padding: 5px;
   margin: 4px;
   margin-bottom: 3em;
-  border-radius: 3px;
+  border-radius: var(--round-corners);
 }
 
 .tag-all {
@@ -135,7 +137,7 @@ body {
   border: none;
   color: var(--white-color);
 
-  border-radius: 3px;
+  border-radius: var(--round-corners);
   width: 100%;
   font-size: 1.5em;
   display: flex;
@@ -183,7 +185,7 @@ body {
   border: none;
   padding: 10px;
   margin: 20px 0;
-  border-radius: 3px;
+  border-radius: var(--round-corners);
   cursor: pointer;
   background: var(--red-color);
   color: var(--white-color);

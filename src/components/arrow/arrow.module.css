@@ -1,0 +1,11 @@
+.arrow {
+  margin-right: 20px;
+}
+
+.down {
+  transform: rotate(90deg);
+}
+
+.path {
+  fill: var(--white-color);
+}
