@@ -14,6 +14,7 @@ http://www.shortguid.com/#/guid/uid-64
 
 ## Decisions
 
+- Going to move everything to CSS modules. Starting with the card components.
 - Not doing tests yet, the idea is still not consolidated.
 - Having the cards independent seems like a bad idea, so I'm making them dependent on articles. That way there's no need to manage IDs or learn more links. Every card has an article associated with it. Even if it's a stub.
 

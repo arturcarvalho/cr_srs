@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react"
 
-import shuffleArray from "../utils/shuffleArray"
+import styles from "./choices.module.css"
+import shuffleArray from "../../utils/shuffleArray"
 
-const ChoicesReply = ({
-  choices,
-  isCorrect,
-  correct,
-  answer,
-  id,
-}) => {
+const ChoicesReply = ({ choices, isCorrect, correct, answer, id }) => {
   const [shuffledChoices, shufflechoices] = useState([])
 
   // Save answer locally, just to track when it's wrong.
@@ -20,11 +15,11 @@ const ChoicesReply = ({
   }, [])
 
   let choiceList = shuffledChoices.map(choice => {
-    const cls = ["card-choice"]
+    const cls = [styles.choice]
 
-    if (isCorrect && choice === correct) cls.push("correct-card-choice")
+    if (isCorrect && choice === correct) cls.push(styles.correctChoice)
     if (!isCorrect && currentAnswer === choice)
-      cls.push("incorrect-card-choice")
+      cls.push(cls.push(styles.incorrectChoice))
 
     return (
       <div key={choice}>
@@ -41,7 +36,7 @@ const ChoicesReply = ({
     )
   })
 
-  return <section className="card-choices">{choiceList}</section>
+  return <section className={styles.choices}>{choiceList}</section>
 }
 
 export default ChoicesReply

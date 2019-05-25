@@ -1,7 +1,8 @@
 import React from "react"
 import { Link } from "gatsby"
 
-import StatusBall from "./statusBall"
+import styles from "./card.module.css"
+import StatusBall from "../statusBall"
 import ChoicesReply from "./choicesReply"
 import InputReply from "./inputReply"
 
@@ -32,7 +33,7 @@ function Card({
   }
 
   return (
-    <section className="card-container">
+    <section className={styles.container}>
       <h1>
         <StatusBall statusColor={statusColor} />
         {title}
@@ -42,7 +43,7 @@ function Card({
       {choices && <ChoicesReply {...choiceArgs} />}
       {!choices && <InputReply {...inputArgs} />}
 
-      <section className="card-more">
+      <section className={styles.learnmore}>
         <Link to={learnMoreUrl}>Learn more</Link>
       </section>
     </section>

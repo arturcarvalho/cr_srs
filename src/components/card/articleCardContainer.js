@@ -2,7 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 
 import Card from "./articleCard"
-import { answer } from "../store/cardsActions"
+import { answer } from "../../store/cardsActions"
 
 const cardColor = (id, cardsById) => {
   if (id in cardsById) return [true, "green"]

@@ -1,0 +1,11 @@
+.input {
+  padding: 0.5em;
+}
+.submit {
+  padding: 0.5em;
+  margin-left: 2px;
+  cursor: pointer;
+  border: 2px solid var(--blue-color);
+  background: var(--blue-color);
+  color: var(--white-color);
+}

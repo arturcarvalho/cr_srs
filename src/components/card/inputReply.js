@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from "react"
 
+import styles from "./input.module.css"
+
 const InputReply = ({ id, isCorrect, correct, answer }) => {
   const inputRef = useRef()
   const inputId = "input" + id
@@ -26,7 +28,7 @@ const InputReply = ({ id, isCorrect, correct, answer }) => {
       <input
         aria-label="input answer"
         id={inputId}
-        className="card-input"
+        className={styles.input}
         ref={inputRef}
         type="text"
         value={inputAnswer}
@@ -34,7 +36,7 @@ const InputReply = ({ id, isCorrect, correct, answer }) => {
           changeInputAnswer(e.target.value)
         }}
       />
-      <input className="card-submit" type="submit" value="Answer" />
+      <input className={styles.submit} type="submit" value="Answer" />
     </form>
   )
 }
