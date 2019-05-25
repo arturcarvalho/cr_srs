@@ -25,7 +25,6 @@ function ArticlesTemplate(props) {
       inArticle: true,
       id,
       title: frontmatter.title,
-      learnMoreUrl: article.fields.slug,
       correct: frontmatter.correct,
       choices: frontmatter.choices,
       html,

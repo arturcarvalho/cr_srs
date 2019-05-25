@@ -1,5 +1,4 @@
 import React from "react"
-import { Link } from "gatsby"
 
 import styles from "./card.module.css"
 import StatusBall from "../statusBall"
@@ -14,7 +13,6 @@ function Card({
   correct,
   title,
   html,
-  learnMoreUrl,
   choices,
 }) {
   const choiceArgs = {
@@ -42,10 +40,6 @@ function Card({
 
       {choices && <ChoicesReply {...choiceArgs} />}
       {!choices && <InputReply {...inputArgs} />}
-
-      <section className={styles.learnmore}>
-        <Link to={learnMoreUrl}>Learn more</Link>
-      </section>
     </section>
   )
 }
