@@ -6,12 +6,14 @@ const ChoicesReply = ({
   choices,
   isCorrect,
   correct,
-  currentAnswer,
-  localAnswer,
   answer,
   id,
 }) => {
   const [shuffledChoices, shufflechoices] = useState([])
+
+  // Save answer locally, just to track when it's wrong.
+  // This way, I can track the wrong answers only while the user is on the page.
+  const [currentAnswer, localAnswer] = useState(null)
 
   useEffect(() => {
     shufflechoices(shuffleArray(choices))
