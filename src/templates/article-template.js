@@ -114,6 +114,7 @@ export const pageQuery = graphql`
     markdownRemark(fields: { slug: { eq: $slug } }) {
       excerpt(pruneLength: 160)
       html
+      timeToRead
       fields {
         slug
         cardId
