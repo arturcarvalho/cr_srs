@@ -46,8 +46,10 @@ export const getCorrectCardsCount = state => Object.keys(state.cardsById).length
 
 // get all cards that can be reviewed (date later than today)
 export const getCardsToReview = state => {
-  const ids = Object.keys(state.cardsById).map(id => {
-    return id
+  const now = new Date()
+  const ids = Object.keys(state.cardsById).filter(id => {
+    const nextPracticeDate = new Date(state.cardsById[id].nextPracticeDate)
+    return now > nextPracticeDate
   })
   return ids
 }
