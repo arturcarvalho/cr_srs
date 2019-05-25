@@ -2,12 +2,13 @@ import React from "react"
 import { graphql } from "gatsby"
 import { connect } from "react-redux"
 
-import CardContainer from "../components/card/articleCardContainer"
+import Card from "../components/card/articleCard"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 import StatusBall from "../components/statusBall"
 import showArticleStatus from "../utils/showArticleStatus"
+import { answer } from "../store/cardsActions"
 
 function ArticlesTemplate(props) {
   const article = props.data.markdownRemark
@@ -22,14 +23,16 @@ function ArticlesTemplate(props) {
 
     const id = fields.id
     const cardArgs = {
-      inArticle: true,
+      answer: props.answer,
+      cardsById: props.cardsById,
+      collapsed: true,
       id,
       title: frontmatter.title,
       correct: frontmatter.correct,
       choices: frontmatter.choices,
       html,
     }
-    return <CardContainer key={id} {...cardArgs} />
+    return <Card key={id} {...cardArgs} />
   })
 
   return (
@@ -78,7 +81,10 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState)(ArticlesTemplate)
+export default connect(
+  mapState,
+  { answer }
+)(ArticlesTemplate)
 
 export const pageQuery = graphql`
   query ArticlesBySlug($slug: String!, $articleId: String!) {

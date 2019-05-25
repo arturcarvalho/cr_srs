@@ -5,16 +5,14 @@ import StatusBall from "../statusBall"
 import ChoicesReply from "./choicesReply"
 import InputReply from "./inputReply"
 
-function Card({
-  id,
-  answer,
-  isCorrect,
-  statusColor,
-  correct,
-  title,
-  html,
-  choices,
-}) {
+const cardColor = (id, cardsById) => {
+  if (id in cardsById) return [true, "green"]
+  return [null, "gray"]
+}
+
+function Card({ id, cardsById, answer, correct, title, html, choices }) {
+  const [isCorrect, statusColor] = cardColor(id, cardsById)
+
   const choiceArgs = {
     choices,
     isCorrect,
