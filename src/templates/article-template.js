@@ -2,7 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import { connect } from "react-redux"
 
-import CardContainer from "../components/cardContainer"
+import CardContainer from "../components/articleCardContainer"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
