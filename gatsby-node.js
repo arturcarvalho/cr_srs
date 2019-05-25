@@ -80,7 +80,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
       if (splitName.length === 2) {
         type = "cards"
-
+        urlEnd = "" // don't add title to url
         createNodeField({
           name: `articleId`,
           node,
@@ -98,7 +98,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       }
     }
 
-    // post/title OR card/1-1/title OR article/1/title
+    // post/title OR card/1-1 OR article/1/title
     const slug =
       "/" + type + "/" + basename + "/" + makeTextSlugFriendly(urlEnd)
 

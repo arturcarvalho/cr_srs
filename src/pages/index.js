@@ -5,14 +5,15 @@ import { connect } from "react-redux"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Progress from "../components/progress"
+import BonusTraining from "../components/bonusTraining"
 import { resetProgress } from "../store/cardsActions"
+import { getCorrectCardsCount, getCardsToReview } from "../store/rootReducer"
 
 function Index(props) {
-  const { data } = props
+  const { data, correctCardsCount, cardsToReview } = props
 
   const siteTitle = data.site.siteMetadata.title
   const cards = data.allMarkdownRemark.edges.map(el => el.node.frontmatter.id)
-  let correctCardsCount = Object.keys(props.cardsById).length
 
   const progressArgs = {
     totalCards: cards.length,
@@ -33,12 +34,8 @@ function Index(props) {
           </p>
         </section>
         <section className="home-right">
-          <h2>
-            <i>
-              TODO <br />
-              BONUS TRAINING
-            </i>
-          </h2>
+          <h1>Bonus Training</h1>
+          <BonusTraining cardsToReview={cardsToReview} />
         </section>
       </section>
       <Progress {...progressArgs} />
@@ -48,7 +45,8 @@ function Index(props) {
 
 const mapState = state => {
   return {
-    cardsById: state.cards.cardsById,
+    correctCardsCount: getCorrectCardsCount(state),
+    cardsToReview: getCardsToReview(state),
   }
 }
 

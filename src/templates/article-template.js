@@ -15,16 +15,14 @@ function ArticlesTemplate(props) {
 
   let cards = null
 
-  const statusColor = showArticleStatus(
-    props.data.cards.edges,
-    props.cardsById
-  )
+  const statusColor = showArticleStatus(props.data.cards.edges, props.cardsById)
 
   cards = props.data.cards.edges.map(card => {
     const { html, frontmatter, fields } = card.node
 
     const id = fields.id
     const cardArgs = {
+      inArticle: true,
       id,
       title: frontmatter.title,
       learnMoreUrl: article.fields.slug,

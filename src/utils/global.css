@@ -161,8 +161,12 @@ body {
   margin-bottom: 3em;
 }
 
+.home h1 {
+  font-size: 2em;
+}
+
 .home-left {
-  flex: 2;
+  flex: 1;
   border-right: 1px solid var(--gray-color);
   padding-right: 20px;
 }
@@ -170,10 +174,36 @@ body {
 .home-right {
   flex: 1;
   margin-left: 30px;
-  text-align: center;
+}
+
+/* bonus training */
+.start-bonus-training {
+  background-color: var(--blue-color);
+  border: none;
+  color: var(--white-color);
+
+  border-radius: 3px;
+  width: 100%;
+  font-size: 1.5em;
   display: flex;
   align-items: center;
-  color: var(--gray-color);
+  cursor: pointer;
+}
+
+.bonus-count {
+  background-color: var(--white-color);
+  color: var(--black-color);
+  width: 1.9em;
+  height: 1.9em;
+  margin: 8px;
+  border-radius: 50%;
+  font-size: 20px;
+  text-align: center;
+}
+
+.bonus-start {
+  flex: 1;
+  text-align: center;
 }
 
 /* PROGRESS */

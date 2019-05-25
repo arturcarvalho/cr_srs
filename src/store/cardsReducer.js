@@ -1,5 +1,6 @@
 import actionTypes from "./actionTypes"
 import { defaultCard } from "../utils/sm2"
+
 /**
  * SHAPE
  *   cardsById: {
@@ -37,3 +38,16 @@ function cards(state = initialState, action) {
 }
 
 export default cards
+
+// selectors
+
+// count cards that user replied correctly inside an article
+export const getCorrectCardsCount = state => Object.keys(state.cardsById).length
+
+// get all cards that can be reviewed (date later than today)
+export const getCardsToReview = state => {
+  const ids = Object.keys(state.cardsById).map(id => {
+    return id
+  })
+  return ids
+}

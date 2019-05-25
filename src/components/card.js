@@ -5,6 +5,7 @@ import StatusBall from "./statusBall"
 import shuffleArray from "../utils/shuffleArray"
 
 function Card({
+  inArticle,
   id,
   answer,
   isCorrect,
@@ -18,26 +19,30 @@ function Card({
   // Save answer locally, just to track when it's wrong.
   // This way, I can track the wrong answers only while the user is on the page.
   const [currentAnswer, localAnswer] = useState(null)
+
   const [inputAnswer, changeInputAnswer] = useState("")
   const [shuffledChoices, shufflechoices] = useState([])
-  const inputRef = useRef()
-  const inputId = "input" + id
+
   let choiceList = null
 
   // componentDidMount look a like
   useEffect(() => {
     // can't put an if in case it's an input card. need to check this.
     shufflechoices(shuffleArray(choices))
-    if (isCorrect) changeInputAnswer(correct)
+
+    if (Boolean(inArticle) && isCorrect) changeInputAnswer(correct)
   }, [])
 
   if (choices) {
     choiceList = shuffledChoices.map(choice => {
       const cls = ["card-choice"]
 
-      if (isCorrect && choice === correct) cls.push("correct-card-choice")
-      if (!isCorrect && currentAnswer === choice)
-        cls.push("incorrect-card-choice")
+      if (Boolean(inArticle)) {
+        if (isCorrect && choice === correct) cls.push("correct-card-choice")
+        if (!isCorrect && currentAnswer === choice)
+          cls.push("incorrect-card-choice")
+      }
+
       return (
         <div key={choice}>
           <button
@@ -55,6 +60,8 @@ function Card({
   }
 
   // else it's an input
+  const inputRef = useRef()
+  const inputId = "input" + id
 
   useEffect(() => {
     if (!choiceList) inputRef.current.focus()
