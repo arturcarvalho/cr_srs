@@ -1,11 +1,10 @@
 import actionTypes from "./actionTypes"
 
-export const answer = (id, answer, correct) => {
+export const answerInArticle = (id, isCorrect) => {
   return {
-    type: actionTypes.ANSWER,
+    type: actionTypes.ANSWER_IN_ARTICLE,
     id,
-    answer,
-    correct,
+    isCorrect,
   }
 }
 

@@ -2,13 +2,13 @@ import React from "react"
 import { graphql } from "gatsby"
 import { connect } from "react-redux"
 
-import Card from "../components/card/articleCard"
+import ArticleCard from "../components/card/articleCard"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 import StatusBall from "../components/statusBall"
 import showArticleStatus from "../utils/showArticleStatus"
-import { answer } from "../store/cardsActions"
+import { answerInArticle } from "../store/cardsActions"
 import styles from "./article.module.css"
 
 function ArticlesTemplate(props) {
@@ -24,17 +24,17 @@ function ArticlesTemplate(props) {
 
     const id = fields.id
     const cardArgs = {
-      answer: props.answer,
+      id,
+      answerInArticle: props.answerInArticle,
       cardsById: props.cardsById,
       expanded: false,
-      id,
       title: frontmatter.title,
       correct: frontmatter.correct,
       choices: frontmatter.choices,
       isFlash: frontmatter.isFlash,
       html,
     }
-    return <Card key={id} {...cardArgs} />
+    return <ArticleCard key={id} {...cardArgs} />
   })
 
   return (
@@ -78,7 +78,7 @@ const mapState = state => {
 
 export default connect(
   mapState,
-  { answer }
+  { answerInArticle }
 )(ArticlesTemplate)
 
 export const pageQuery = graphql`

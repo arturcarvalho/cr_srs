@@ -5,6 +5,7 @@ import styles from "./card.module.css"
 import StatusBall from "../statusBall"
 import ChoicesReply from "./choicesReply"
 import InputReply from "./inputReply"
+import FlashReply from "./flashReply"
 import Arrow from "../arrow/arrow"
 
 const cardColor = (id, cardsById) => {
@@ -12,43 +13,41 @@ const cardColor = (id, cardsById) => {
   return [null, "gray"]
 }
 
+const getCardType = (choices, isFlash) => {
+  if (isFlash) return "flash"
+  if (choices) return "choices"
+  return "input"
+}
+
 function Card({
   id,
   expanded,
   cardsById,
-  answer,
+  answerInArticle,
   correct,
   title,
   html,
   choices,
+  isFlash,
 }) {
   const [isCorrect, statusColor] = cardColor(id, cardsById)
   const [isExpanded, toggleExpanded] = useState(expanded)
 
+  const cardType = getCardType(choices, isFlash)
   const toggle = () => {
     toggleExpanded(c => !c)
   }
 
-  const choiceArgs = {
-    choices,
-    isCorrect,
-    correct,
-    answer,
-    id,
-  }
+  const args = { id, isCorrect, correct, answerInArticle }
+  const choiceArgs = { ...args, choices }
+  const inputArgs = { ...args }
 
-  const inputArgs = {
-    id,
-    isCorrect,
-    correct,
-    answer,
-  }
-
-  const body = (
+  const replySection = (
     <section className={styles.body}>
       <div dangerouslySetInnerHTML={{ __html: html }} />
-      {choices && <ChoicesReply {...choiceArgs} />}
-      {!choices && <InputReply {...inputArgs} />}
+      {cardType === "choices" && <ChoicesReply {...choiceArgs} />}
+      {cardType === "input" && <InputReply {...inputArgs} />}
+      {cardType === "flash" && <FlashReply />}
     </section>
   )
 
@@ -62,7 +61,7 @@ function Card({
         <StatusBall statusColor={statusColor} />
       </header>
 
-      {isExpanded && body}
+      {isExpanded && replySection}
     </section>
   )
 }

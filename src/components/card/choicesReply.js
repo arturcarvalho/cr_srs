@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react"
 import styles from "./choices.module.css"
 import shuffleArray from "../../utils/shuffleArray"
 
-const ChoicesReply = ({ choices, isCorrect, correct, answer, id }) => {
+const ChoicesReply = ({ choices, isCorrect, correct, answerInArticle, id }) => {
   const [shuffledChoices, shufflechoices] = useState([])
 
   // Save answer locally, just to track when it's wrong.
@@ -27,7 +27,7 @@ const ChoicesReply = ({ choices, isCorrect, correct, answer, id }) => {
           className={cls.join(" ")}
           onClick={() => {
             localAnswer(choice)
-            answer(id, choice, correct)
+            answerInArticle(id, choice === correct)
           }}
         >
           {choice}

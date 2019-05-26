@@ -14,9 +14,9 @@ const initialState = {
 
 function cards(state = initialState, action) {
   switch (action.type) {
-    case actionTypes.ANSWER:
+    case actionTypes.ANSWER_IN_ARTICLE:
       // don't add if it's wrong
-      if (action.correct !== action.answer) return state
+      if (!action.isCorrect) return state
 
       // don't change if it's already in the list
       if (action.id in state.cardsById) return state
