@@ -7,7 +7,7 @@ import StatusBall from "../statusBall"
 import Reply from "../replies/reply"
 import Arrow from "../arrow/arrow"
 
-const cardColor = (id, cardsById) => {
+const cardStatus = (id, cardsById) => {
   if (id in cardsById) return [true, "green"]
   return [null, "gray"]
 }
@@ -29,7 +29,7 @@ function Card({
   choices,
   isFlash,
 }) {
-  const [isCorrect, statusColor] = cardColor(id, cardsById)
+  const [isCorrect, statusColor] = cardStatus(id, cardsById)
   const [isExpanded, toggleExpanded] = useState(expanded)
 
   const cardType = getCardType(choices, isFlash)
