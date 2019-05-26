@@ -8,7 +8,7 @@ import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 import StatusBall from "../components/statusBall"
 import showArticleStatus from "../utils/showArticleStatus"
-import { answerInArticle } from "../store/cardsActions"
+import { onAnswerInArticle } from "../store/cardsActions"
 import styles from "./article.module.css"
 
 function ArticlesTemplate(props) {
@@ -25,7 +25,7 @@ function ArticlesTemplate(props) {
     const id = fields.id
     const cardArgs = {
       id,
-      answerInArticle: props.answerInArticle,
+      onAnswerInArticle: props.onAnswerInArticle,
       cardsById: props.cardsById,
       expanded: false,
       title: frontmatter.title,
@@ -78,7 +78,7 @@ const mapState = state => {
 
 export default connect(
   mapState,
-  { answerInArticle }
+  { onAnswerInArticle }
 )(ArticlesTemplate)
 
 export const pageQuery = graphql`

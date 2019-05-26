@@ -1,6 +1,6 @@
 import actionTypes from "./actionTypes"
 
-export const answerInArticle = (id, isCorrect) => {
+export const onAnswerInArticle = (id, isCorrect) => {
   return {
     type: actionTypes.ANSWER_IN_ARTICLE,
     id,

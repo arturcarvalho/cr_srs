@@ -2,7 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 
 import Card from "./card"
-import { answerInArticle } from "../store/cardsActions"
+import { onAnswerInArticle } from "../store/cardsActions"
 
 const cardColor = (id, cardsById) => {
   if (id in cardsById) return [true, "green"]
@@ -28,5 +28,5 @@ const mapState = state => {
 
 export default connect(
   mapState,
-  { answerInArticle }
+  { onAnswerInArticle }
 )(CardContainer)

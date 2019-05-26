@@ -5,7 +5,7 @@ import { connect } from "react-redux"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
-import { answerInArticle } from "../store/cardsActions"
+import { onAnswerInArticle } from "../store/cardsActions"
 
 function CardsIndex(props) {
   const { data } = props
@@ -40,7 +40,7 @@ function CardsIndex(props) {
 
 export default connect(
   null,
-  { answerInArticle }
+  { onAnswerInArticle }
 )(CardsIndex)
 
 export const pageQuery = graphql`

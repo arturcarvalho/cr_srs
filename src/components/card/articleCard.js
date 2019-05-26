@@ -23,7 +23,7 @@ function Card({
   id,
   expanded,
   cardsById,
-  answerInArticle,
+  onAnswerInArticle,
   correct,
   title,
   html,
@@ -38,7 +38,7 @@ function Card({
     toggleExpanded(c => !c)
   }
 
-  const args = { id, isCorrect, correct, answerInArticle }
+  const args = { id, isCorrect, correct, onAnswer: onAnswerInArticle }
   const choiceArgs = { ...args, choices }
   const inputArgs = { ...args }
 

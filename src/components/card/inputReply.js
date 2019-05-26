@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react"
 
 import styles from "./input.module.css"
 
-const InputReply = ({ id, isCorrect, correct, answerInArticle }) => {
+const InputReply = ({ id, isCorrect, correct, onAnswer }) => {
   const inputRef = useRef()
   const inputId = "input" + id
 
@@ -20,7 +20,7 @@ const InputReply = ({ id, isCorrect, correct, answerInArticle }) => {
     e.preventDefault()
     if (correct !== inputAnswer) changeInputAnswer("")
 
-    answerInArticle(id, inputAnswer === correct)
+    onAnswer(id, inputAnswer === correct)
   }
 
   return (
