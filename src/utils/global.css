@@ -4,6 +4,7 @@
   --black-color: #272822;
   --blue-color: #007acc;
   --gray-color: #e2e2e2;
+  --dark-gray-color: #a2a2a2;
   --green-color: #00cc52;
   --red-color: #cc003d;
   --orange-color: #e5e500;
@@ -13,10 +14,6 @@
 
 body {
   background-color: var(--white-color);
-}
-
-.article-title {
-  margin-left: .5em;
 }
 
 /* MENU */

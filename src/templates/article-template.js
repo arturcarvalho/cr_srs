@@ -9,6 +9,7 @@ import { rhythm, scale } from "../utils/typography"
 import StatusBall from "../components/statusBall"
 import showArticleStatus from "../utils/showArticleStatus"
 import { answer } from "../store/cardsActions"
+import styles from "./article.module.css"
 
 function ArticlesTemplate(props) {
   const article = props.data.markdownRemark
@@ -30,6 +31,7 @@ function ArticlesTemplate(props) {
       title: frontmatter.title,
       correct: frontmatter.correct,
       choices: frontmatter.choices,
+      isFlash: frontmatter.isFlash,
       html,
     }
     return <Card key={id} {...cardArgs} />
@@ -43,7 +45,7 @@ function ArticlesTemplate(props) {
       />
       <h1>
         <StatusBall statusColor={statusColor} />
-        <span className="article-title">{article.frontmatter.title}</span>
+        <span className={styles.title}>{article.frontmatter.title}</span>
       </h1>
       <p
         style={{
@@ -58,8 +60,9 @@ function ArticlesTemplate(props) {
       <div dangerouslySetInnerHTML={{ __html: article.html }} />
 
       {cards.length > 0 && (
-        <section>
+        <section className={styles.cards}>
           <h1>Training</h1>
+          <em>Every correct card will be added to your bonus training.</em>
           {cards}
         </section>
       )}
@@ -104,6 +107,7 @@ export const pageQuery = graphql`
             title
             choices
             correct
+            isFlash
           }
         }
       }
