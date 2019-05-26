@@ -1,0 +1,31 @@
+.correct {
+  margin-top: 30px;
+  border-top: 1px solid var(--black-color);
+}
+
+.correct header {
+  display: inline-block;
+  background-color: var(--black-color);
+  color: var(--green-color);
+  font-weight: bold;
+  border-bottom-left-radius: var(--round-corners);
+  border-bottom-right-radius: var(--round-corners);
+  margin-bottom: 10px;
+  padding: 3px 15px;
+}
+
+.correct blockquote {
+  font-style: var(--font-sans);
+  
+  border: none;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+}
+
+.correct blockquote:before {
+  color: var(--black-color);
+  content: "⇒";
+  font-size: 28px;
+  margin-right: 10px;
+}

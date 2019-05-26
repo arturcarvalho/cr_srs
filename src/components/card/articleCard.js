@@ -3,9 +3,8 @@ import classnames from "classnames"
 
 import styles from "./card.module.css"
 import StatusBall from "../statusBall"
-import ChoicesReply from "./choicesReply"
-import InputReply from "./inputReply"
-import FlashReply from "./flashReply"
+
+import Reply from "../replies/reply"
 import Arrow from "../arrow/arrow"
 
 const cardColor = (id, cardsById) => {
@@ -38,16 +37,12 @@ function Card({
     toggleExpanded(c => !c)
   }
 
-  const args = { id, isCorrect, correct, onAnswer: onAnswerInArticle }
-  const choiceArgs = { ...args, choices }
-  const inputArgs = { ...args }
+  const replyArgs = { id, isCorrect, correct, choices, cardType }
 
-  const replySection = (
+  const bodySection = (
     <section className={styles.body}>
       <div dangerouslySetInnerHTML={{ __html: html }} />
-      {cardType === "choices" && <ChoicesReply {...choiceArgs} />}
-      {cardType === "input" && <InputReply {...inputArgs} />}
-      {cardType === "flash" && <FlashReply />}
+      <Reply {...replyArgs} onAnswer={onAnswerInArticle} />
     </section>
   )
 
@@ -61,7 +56,7 @@ function Card({
         <StatusBall statusColor={statusColor} />
       </header>
 
-      {isExpanded && replySection}
+      {isExpanded && bodySection}
     </section>
   )
 }
