@@ -3,9 +3,9 @@ import classnames from "classnames"
 
 import styles from "./card.module.css"
 import StatusBall from "../statusBall"
-
 import Reply from "../replies/reply"
 import Arrow from "../arrow/arrow"
+import AnswerStatus from "./answerStatus"
 
 const cardStatus = (id, cardsById) => {
   if (id in cardsById) return [true, "green"]
@@ -34,7 +34,7 @@ function Card({
 
   const cardType = getCardType(choices, isFlash)
   const toggle = () => {
-    toggleExpanded(c => !c)
+    toggleExpanded(cardExpanded => !cardExpanded)
   }
 
   const replyArgs = { id, isCorrect, correct, choices, cardType }
@@ -42,6 +42,7 @@ function Card({
   const bodySection = (
     <section className={styles.body}>
       <div dangerouslySetInnerHTML={{ __html: html }} />
+      <AnswerStatus isCorrect={isCorrect} />
       <Reply {...replyArgs} onAnswer={onAnswerInArticle} />
     </section>
   )

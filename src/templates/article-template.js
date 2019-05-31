@@ -62,7 +62,7 @@ function ArticlesTemplate(props) {
       {cards.length > 0 && (
         <section className={styles.cards}>
           <h1>Training</h1>
-          <em>Every correct card will be added to your bonus training.</em>
+          <em>Every correct card will <strong>eventually</strong> appear in your bonus training.</em>
           {cards}
         </section>
       )}

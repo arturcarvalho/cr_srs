@@ -1,0 +1,20 @@
+.status {
+  opacity: 0;
+  margin-left: 1em;
+  margin-bottom: 0.5em;
+  color: var(--green-color);
+}
+
+.enter {
+  opacity: 0;
+}
+
+.enterActive {
+  opacity: 1;
+  transition: opacity 1000ms;
+}
+
+.enterDone {
+  opacity: 0;
+  transition: opacity 200ms;
+}
