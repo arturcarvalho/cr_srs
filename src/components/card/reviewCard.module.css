@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  padding-bottom: 20px;
+  border-radius: var(--round-corners);
+  cursor: pointer;
+}
+
+.title {
+  font-family: var(--sans-font);
+  flex: 1;
+  font-size: 28px;
+}
+
+.reply {
+  margin-top: 20px;
+}
+
+.learn {
+  margin-top: 20px;
+}

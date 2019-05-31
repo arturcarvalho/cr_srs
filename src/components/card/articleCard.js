@@ -1,21 +1,17 @@
 import React, { useState } from "react"
 import classnames from "classnames"
 
-import styles from "./card.module.css"
+import { getCardType } from "../../utils/getCardType"
+import styles from "./articleCard.module.css"
 import StatusBall from "../statusBall/statusBall"
 import Reply from "../replies/reply"
 import Arrow from "../arrow/arrow"
 import AnswerStatus from "./answerStatus"
+import Answer from "../answer/answer"
 
 const cardStatus = (id, cardsById) => {
   if (id in cardsById) return [true, "all"]
   return [null, "none"]
-}
-
-const getCardType = (choices, isFlash) => {
-  if (isFlash) return "flash"
-  if (choices) return "choices"
-  return "input"
 }
 
 function Card({
@@ -40,11 +36,19 @@ function Card({
 
   const replyArgs = { id, isCorrect, correct, choices, cardType }
 
+  let replySection
+
+  if (isCorrect) {
+    replySection = <Answer correct={correct} />
+  } else {
+    replySection = <Reply {...replyArgs} onAnswer={onAnswerInArticle} />
+  }
+
   const bodySection = (
     <section className={styles.body}>
       <div dangerouslySetInnerHTML={{ __html: html }} />
       <AnswerStatus dontShow={isFlash} isCorrect={isCorrect} />
-      <Reply {...replyArgs} onAnswer={onAnswerInArticle} />
+      {replySection}
     </section>
   )
 

@@ -1,0 +1,27 @@
+.grade {
+  display: flex;
+}
+
+.centered {
+  justify-content: center;
+}
+
+.spaced {
+  justify-content: space-between;
+}
+
+.button {
+  border: none;
+  padding: 10px;
+  border-radius: var(--round-corners);
+  cursor: pointer;
+  background: var(--green-color);
+  color: var(--white-color);
+  margin-top: 20px;
+
+  flex-basis: 140px;
+}
+
+.button:hover {
+  color: var(--black-color);
+}

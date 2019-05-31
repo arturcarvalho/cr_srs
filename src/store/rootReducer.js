@@ -7,3 +7,5 @@ export const getCorrectCardsCount = state =>
   fromCards.getCorrectCardsCount(state.cards)
 
 export const getCardsToReview = state => fromCards.getCardsToReview(state.cards)
+
+export const getCard = (state, id) => fromCards.getCard(state.cards, id)

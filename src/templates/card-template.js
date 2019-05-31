@@ -1,9 +1,12 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { connect } from "react-redux"
 
-import CardContainer from "../components/cardContainer"
+import { onAnswerInReview } from "../store/cardsActions"
+import Card from "../components/card/reviewCard"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import { getCard, getCardsToReview } from "../store/rootReducer"
 
 function CardTemplate(props) {
   const card = props.data.markdownRemark
@@ -12,6 +15,7 @@ function CardTemplate(props) {
   const id = card.fields.cardId
 
   const articleUrl = props.data.article.edges[0].node.fields.slug
+
   const cardArgs = {
     id,
     title: card.frontmatter.title,
@@ -19,6 +23,10 @@ function CardTemplate(props) {
     correct: card.frontmatter.correct,
     learnMoreUrl: articleUrl,
     html: card.html,
+    isFlash: card.frontmatter.isFlash,
+    cardsToReview: props.cardsToReview,
+    onAnswerInReview: props.onAnswerInReview,
+    currentCard: props.currentCard,
   }
 
   return (
@@ -27,12 +35,23 @@ function CardTemplate(props) {
         title={card.frontmatter.title}
         description={card.frontmatter.description || card.excerpt}
       />
-      <CardContainer {...cardArgs} />
+      <Card {...cardArgs} />
     </Layout>
   )
 }
 
-export default CardTemplate
+const mapStateToProps = (state, props) => {
+  const id = props.data.markdownRemark.fields.cardId
+  return {
+    cardsToReview: getCardsToReview(state),
+    currentCard: getCard(state, id),
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  { onAnswerInReview }
+)(CardTemplate)
 
 export const pageQuery = graphql`
   query CardsBySlug($slug: String!, $articleId: String!) {
@@ -64,6 +83,7 @@ export const pageQuery = graphql`
       frontmatter {
         correct
         choices
+        isFlash
         title
         date(formatString: "MMMM DD, YYYY")
       }

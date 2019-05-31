@@ -19,7 +19,7 @@ export const defaultCard = {
   repetitions: 0, // consecutive times answer was correct
   easiness: 2.5, // difficulty
   interval: 1, // interval in days (next practice is based on this interval)
-  nextPracticeDate: getNextPracticeDate(1),
+  nextPracticeDate: getNextPracticeDate(1), // change to 0 for quick manual tests
 }
 
 /**
@@ -47,7 +47,7 @@ const sm2 = (grade, card = defaultCard) => {
   updCard.easiness = calculateEasiness(easiness, grade)
 
   // next practice
-  updCard.nextPracticeDate = getNextPracticeDate(interval)
+  updCard.nextPracticeDate = getNextPracticeDate(updCard.interval)
   return updCard
 }
 

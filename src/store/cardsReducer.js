@@ -29,6 +29,15 @@ function cards(state = initialState, action) {
         },
       }
 
+    case actionTypes.ANSWER_IN_REVIEW:
+      return {
+        ...state,
+        cardsById: {
+          ...state.cardsById,
+          [action.id]: action.card,
+        },
+      }
+
     case actionTypes.RESET_PROGRESS:
       return initialState
 
@@ -40,6 +49,9 @@ function cards(state = initialState, action) {
 export default cards
 
 // selectors
+
+// get card
+export const getCard = (state, id) => state.cardsById[id]
 
 // count cards that user replied correctly inside an article
 export const getCorrectCardsCount = state => Object.keys(state.cardsById).length
