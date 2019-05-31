@@ -33,6 +33,7 @@ function Card({
   const [isExpanded, toggleExpanded] = useState(expanded)
 
   const cardType = getCardType(choices, isFlash)
+
   const toggle = () => {
     toggleExpanded(cardExpanded => !cardExpanded)
   }
@@ -42,7 +43,7 @@ function Card({
   const bodySection = (
     <section className={styles.body}>
       <div dangerouslySetInnerHTML={{ __html: html }} />
-      <AnswerStatus isCorrect={isCorrect} />
+      <AnswerStatus dontShow={isFlash} isCorrect={isCorrect} />
       <Reply {...replyArgs} onAnswer={onAnswerInArticle} />
     </section>
   )
