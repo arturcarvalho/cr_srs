@@ -1,8 +1,9 @@
 .status {
   opacity: 0;
-  margin-left: 1em;
-  margin-bottom: 0.5em;
-  color: var(--green-color);
+  padding-left: 1em;
+  margin-bottom: 0em;
+  background: var(--green-color);
+  color: var(--white-color);
 }
 
 .enter {
