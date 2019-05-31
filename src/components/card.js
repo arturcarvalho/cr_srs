@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react"
 import { Link } from "gatsby"
 
-import StatusBall from "./statusBall"
+import StatusBall from "./statusBall/statusBall"
 import shuffleArray from "../utils/shuffleArray"
 
 function Card({

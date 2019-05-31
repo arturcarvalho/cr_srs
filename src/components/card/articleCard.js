@@ -2,14 +2,14 @@ import React, { useState } from "react"
 import classnames from "classnames"
 
 import styles from "./card.module.css"
-import StatusBall from "../statusBall"
+import StatusBall from "../statusBall/statusBall"
 import Reply from "../replies/reply"
 import Arrow from "../arrow/arrow"
 import AnswerStatus from "./answerStatus"
 
 const cardStatus = (id, cardsById) => {
-  if (id in cardsById) return [true, "green"]
-  return [null, "gray"]
+  if (id in cardsById) return [true, "all"]
+  return [null, "none"]
 }
 
 const getCardType = (choices, isFlash) => {
@@ -29,7 +29,7 @@ function Card({
   choices,
   isFlash,
 }) {
-  const [isCorrect, statusColor] = cardStatus(id, cardsById)
+  const [isCorrect, status] = cardStatus(id, cardsById)
   const [isExpanded, toggleExpanded] = useState(expanded)
 
   const cardType = getCardType(choices, isFlash)
@@ -54,7 +54,7 @@ function Card({
       <header className={hdr} onClick={toggle}>
         <Arrow isExpanded={isExpanded} />
         <span className={styles.title}>{title}</span>
-        <StatusBall statusColor={statusColor} />
+        <StatusBall status={status} />
       </header>
 
       {isExpanded && bodySection}

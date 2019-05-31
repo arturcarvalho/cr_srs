@@ -62,33 +62,6 @@ body {
   margin-bottom: 15px;
 }
 
-/* BALL */
-
-.ball {
-  display: inline-block;
-  border-radius: 50%;
-  height: 0.8em;
-  width: 0.8em;
-
-  margin-right: 5px;
-}
-
-.gray-ball {
-  background: var(--gray-color);
-}
-
-.green-ball {
-  background: var(--green-color);
-}
-
-.red-ball {
-  background: var(--red-color);
-}
-
-.orange-ball {
-  background: var(--orange-color);
-}
-
 /* TAGS */
 .tag {
   border: none;

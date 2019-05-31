@@ -7,7 +7,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
 import TagFilter from "../components/tagFilter"
-import StatusBall from "../components/statusBall"
+import StatusBall from "../components/statusBall/statusBall"
 import showArticleStatus from "../utils/showArticleStatus"
 
 function ArticlesIndex(props) {
@@ -38,7 +38,7 @@ function ArticlesIndex(props) {
           c => c.node.fields.articleId === id
         )
 
-        const statusColor = showArticleStatus(articleCards, props.cardsById)
+        const status = showArticleStatus(articleCards, props.cardsById)
 
         const tags = node.frontmatter.tags
 
@@ -56,7 +56,7 @@ function ArticlesIndex(props) {
                 }}
               >
                 <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                  <StatusBall statusColor={statusColor} />
+                  <StatusBall status={status} />
                   {node.frontmatter.title}
                 </Link>
               </h3>

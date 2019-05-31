@@ -6,7 +6,7 @@ import ArticleCard from "../components/card/articleCard"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
-import StatusBall from "../components/statusBall"
+import StatusBall from "../components/statusBall/statusBall"
 import showArticleStatus from "../utils/showArticleStatus"
 import { onAnswerInArticle } from "../store/cardsActions"
 import styles from "./article.module.css"
@@ -17,7 +17,7 @@ function ArticlesTemplate(props) {
 
   let cards = null
 
-  const statusColor = showArticleStatus(props.data.cards.edges, props.cardsById)
+  const status = showArticleStatus(props.data.cards.edges, props.cardsById)
 
   cards = props.data.cards.edges.map(card => {
     const { html, frontmatter, fields } = card.node
@@ -44,7 +44,7 @@ function ArticlesTemplate(props) {
         description={article.frontmatter.description || article.excerpt}
       />
       <h1>
-        <StatusBall statusColor={statusColor} />
+        <StatusBall status={status} />
         <span className={styles.title}>{article.frontmatter.title}</span>
       </h1>
       <p

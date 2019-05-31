@@ -1,0 +1,25 @@
+
+.ball {
+  display: inline-block;
+  border-radius: 50%;
+  height: 0.8em;
+  width: 0.8em;
+
+  margin-right: 5px;
+}
+
+.gray {
+  background: var(--gray-color);
+}
+
+.green {
+  background: var(--green-color);
+}
+
+.red {
+  background: var(--red-color);
+}
+
+.orange {
+  background: var(--orange-color);
+}

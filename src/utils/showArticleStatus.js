@@ -5,9 +5,9 @@ const showArticleStatus = (cards, cardsById) => {
     return cardId in cardsById ? tot + 1 : tot
   }, 0)
 
-  if (articleCards.length === correctCards) return "green" // all cards correct
-  if (correctCards === 0) return "gray"
-  if (correctCards > 0) return "orange"
+  if (articleCards.length === correctCards) return "all" // all cards correct
+  if (correctCards === 0) return "none"
+  if (correctCards > 0) return "some"
 }
 
 export default showArticleStatus
