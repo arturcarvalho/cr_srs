@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react"
 
+import FailMessage from "../messages/failMessage"
 import styles from "./input.module.css"
 
 const InputReply = ({ id, isCorrect, correct, onAnswer }) => {
@@ -7,6 +8,7 @@ const InputReply = ({ id, isCorrect, correct, onAnswer }) => {
   const inputId = "input" + id
 
   const [inputAnswer, changeInputAnswer] = useState("")
+  const [failed, setFailed] = useState(false)
 
   useEffect(() => {
     if (isCorrect) changeInputAnswer(correct)
@@ -20,12 +22,15 @@ const InputReply = ({ id, isCorrect, correct, onAnswer }) => {
     e.preventDefault()
     if (correct !== inputAnswer) changeInputAnswer("")
 
-    onAnswer(id, inputAnswer === correct)
+    const right = inputAnswer === correct
+    onAnswer(id, right)
+    setFailed(!right)
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <input
+        autoComplete="off"
         aria-label="input answer"
         id={inputId}
         className={styles.input}
@@ -37,6 +42,7 @@ const InputReply = ({ id, isCorrect, correct, onAnswer }) => {
         }}
       />
       <input className={styles.submit} type="submit" value="Answer" />
+      <FailMessage failed={failed} setFailed={setFailed} />
     </form>
   )
 }

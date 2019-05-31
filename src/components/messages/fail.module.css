@@ -1,0 +1,14 @@
+.message {
+  opacity: 0;
+}
+
+.enter {
+  opacity: 1;
+  transition: opacity 300ms;
+  color: var(--red-color);
+}
+
+.exit {
+  opacity: 0;
+  transition: opacity 300ms;
+}
