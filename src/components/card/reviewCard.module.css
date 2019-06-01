@@ -1,5 +1,4 @@
 .header {
-  display: flex;
   align-items: center;
   font-weight: bold;
   padding-bottom: 20px;
@@ -9,7 +8,6 @@
 
 .title {
   font-family: var(--sans-font);
-  flex: 1;
   font-size: 28px;
 }
 
@@ -19,4 +17,25 @@
 
 .learn {
   margin-top: 20px;
+}
+
+.progress {
+  display: inline-block;
+  margin-bottom: 10px;
+
+  background: var(--green-color);
+  color: var(--white-color);
+  border-radius: var(--round-corners);
+  padding: 5px 10px;
+  text-align: center;
+}
+
+.circle {
+  display: inline-block;
+
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--white-color);
+  color: var(--black-color);
 }

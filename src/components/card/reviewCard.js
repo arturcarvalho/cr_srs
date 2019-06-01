@@ -71,7 +71,11 @@ function Card({
   return (
     <section className={styles.container}>
       <header className={styles.header}>
-        <span className={styles.title}>{title}</span>
+        <div className={styles.progress}>
+          <span className={styles.circle}>{cardsToReview.length}</span>{" "}
+          remaining
+        </div>
+        <div className={styles.title}>{title}</div>
       </header>
 
       {bodySection}

@@ -14,9 +14,17 @@ const Progress = ({ resetProgress, totalCards, correctCardsCount }) => {
 
   return (
     <>
-      <h2>
-        My progress ({correctCardsCount} / {totalCards}):
-      </h2>
+      <h1>My progress</h1>
+
+      <section>
+        <div>
+          Cards added to training: {correctCardsCount} / {totalCards}
+        </div>
+        <div>
+          Correct answers: 120
+        </div>
+      </section>
+      <hr />
       <div className="progress-squares">{squares}</div>
 
       {correctCardsCount > 0 && (
