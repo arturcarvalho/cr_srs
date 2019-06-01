@@ -20,6 +20,7 @@ export const onAnswerInReview = (id, grade, currentCardState) => {
     type: actionTypes.ANSWER_IN_REVIEW,
     id,
     card,
+    isCorrect: grade >= 3
   }
 }
 

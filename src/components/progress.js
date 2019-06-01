@@ -1,6 +1,6 @@
 import React from "react"
 
-const Progress = ({ resetProgress, totalCards, correctCardsCount }) => {
+const Progress = ({ resetProgress, totalCards, correctCardsCount, points }) => {
   const cardsMissing = totalCards - correctCardsCount
   const squares = []
 
@@ -17,11 +17,9 @@ const Progress = ({ resetProgress, totalCards, correctCardsCount }) => {
       <h1>My progress</h1>
 
       <section>
+        <div>Points: {points * 10}</div>
         <div>
           Cards added to training: {correctCardsCount} / {totalCards}
-        </div>
-        <div>
-          Correct answers: 120
         </div>
       </section>
       <hr />

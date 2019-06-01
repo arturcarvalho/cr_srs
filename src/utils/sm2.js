@@ -31,7 +31,7 @@ const sm2 = (grade, card = defaultCard) => {
   const { repetitions, easiness, interval } = card
   const updCard = {} // updated card
 
-  // repetitions
+  // repetitions (failed)
   updCard.repetitions = grade < 3 ? 0 : repetitions + 1
 
   // interval

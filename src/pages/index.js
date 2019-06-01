@@ -19,6 +19,7 @@ function Index(props) {
     totalCards: cards.length,
     correctCardsCount,
     resetProgress: props.resetProgress,
+    points: props.points
   }
 
   return (
@@ -47,6 +48,7 @@ const mapState = state => {
   return {
     correctCardsCount: getCorrectCardsCount(state),
     cardsToReview: getCardsToReview(state),
+    points: state.cards.points,
   }
 }
 

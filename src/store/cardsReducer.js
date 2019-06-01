@@ -10,6 +10,7 @@ import { defaultCard } from "../utils/sm2"
 
 const initialState = {
   cardsById: {},
+  points: 0,
 }
 
 function cards(state = initialState, action) {
@@ -22,7 +23,7 @@ function cards(state = initialState, action) {
       if (action.id in state.cardsById) return state
 
       return {
-        ...state,
+        points: state.points + 1,
         cardsById: {
           ...state.cardsById,
           [action.id]: defaultCard,
@@ -30,8 +31,10 @@ function cards(state = initialState, action) {
       }
 
     case actionTypes.ANSWER_IN_REVIEW:
+      const pointsToAdd = action.isCorrect ? 1 : 0
+
       return {
-        ...state,
+        points: state.points + pointsToAdd,
         cardsById: {
           ...state.cardsById,
           [action.id]: action.card,
