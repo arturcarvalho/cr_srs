@@ -58,7 +58,6 @@ export const pageQuery = graphql`
         node {
           fields {
             slug
-            cardId
             articleId
           }
           frontmatter {

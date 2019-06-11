@@ -24,12 +24,6 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       } else {
         type = "cards"
         slug = "/" + type + "/" + basename
-
-        createNodeField({
-          name: `cardId`,
-          node,
-          value: basename,
-        })
       }
     } else {
       // posts

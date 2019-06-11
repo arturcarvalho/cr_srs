@@ -12,7 +12,7 @@ function CardTemplate(props) {
   const card = props.data.markdownRemark
   const siteTitle = props.data.site.siteMetadata.title
 
-  const id = card.fields.cardId
+  const id = card.fields.id
 
   const articleUrl = props.data.article.edges[0].node.fields.slug
 
@@ -41,7 +41,7 @@ function CardTemplate(props) {
 }
 
 const mapStateToProps = (state, props) => {
-  const id = props.data.markdownRemark.fields.cardId
+  const id = props.data.markdownRemark.fields.id
   return {
     cardsToReview: getCardsToReview(state),
     currentCard: getCard(state, id),
@@ -81,7 +81,7 @@ export const pageQuery = graphql`
       excerpt(pruneLength: 160)
       html
       fields {
-        cardId
+        id
         articleId
       }
       frontmatter {
