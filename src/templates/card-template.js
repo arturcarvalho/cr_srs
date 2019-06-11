@@ -53,6 +53,10 @@ export default connect(
   { onAnswerInReview }
 )(CardTemplate)
 
+// {
+// 	"slug": "/cards/4-3",
+//   "articleId": "sleep"
+// }
 export const pageQuery = graphql`
   query CardsBySlug($slug: String!, $articleId: String!) {
     site {

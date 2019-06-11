@@ -1,6 +1,68 @@
 const path = require(`path`)
-const { createFilePath } = require(`gatsby-source-filesystem`)
 const _ = require("lodash")
+
+const makeTextSlugFriendly = str => _.kebabCase(str.toLowerCase())
+
+exports.onCreateNode = ({ node, actions, getNode }) => {
+  const { createNodeField } = actions
+  if (node.internal.type === `MarkdownRemark`) {
+    const basename = path.basename(node.fileAbsolutePath, ".md")
+
+    const folders = path.dirname(node.fileAbsolutePath).split("/")
+    const lastFolder = folders[folders.length - 1]
+    const secondLastFolder = folders[folders.length - 2]
+
+    let type
+    let slug
+
+    if (secondLastFolder === "articles") {
+      // the articles are the ones which
+      // have the filename equal to the folder they're in.
+      if (basename === lastFolder) {
+        type = "articles"
+        slug = "/" + type + "/" + makeTextSlugFriendly(node.frontmatter.title)
+      } else {
+        type = "cards"
+        slug = "/" + type + "/" + basename
+
+        createNodeField({
+          name: `cardId`,
+          node,
+          value: basename,
+        })
+      }
+    } else {
+      // posts
+      type = "posts"
+      slug = "/" + type + "/" + makeTextSlugFriendly(node.frontmatter.title)
+    }
+
+    // needed on articles and cards
+    createNodeField({
+      name: `articleId`,
+      node,
+      value: lastFolder,
+    })
+
+    createNodeField({
+      name: `slug`,
+      node,
+      value: slug,
+    })
+
+    createNodeField({
+      name: `id`,
+      node,
+      value: basename,
+    })
+
+    createNodeField({
+      name: `type`,
+      node,
+      value: type,
+    })
+  }
+}
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
@@ -21,6 +83,7 @@ exports.createPages = ({ graphql, actions }) => {
                 slug
                 id
                 type
+                articleId
               }
             }
           }
@@ -35,6 +98,10 @@ exports.createPages = ({ graphql, actions }) => {
     // Create all types of pages.
     const pages = result.data.allMarkdownRemark.edges
 
+    // check pages don't have same name
+    const slugs = pages.map(page => page.node.fields.slug)
+    if (slugs.length !== new Set(slugs).size) throw "Duplicate pages"
+
     pages.forEach((page, index) => {
       const previous = index === pages.length - 1 ? null : pages[index + 1].node
       const next = index === 0 ? null : pages[index - 1].node
@@ -44,80 +111,20 @@ exports.createPages = ({ graphql, actions }) => {
       if (page.node.fields.type === "cards") component = card
       if (page.node.fields.type === "articles") component = article
 
-      const articleId = "" + parseInt(page.node.fields.id) // 1-1 => 1
-
-      // context prop is used for args in graphql
-      createPage({
-        path: page.node.fields.slug,
-        component,
-        context: {
-          articleId, // NaN for posts
-          slug: page.node.fields.slug,
-          previous,
-          next,
-        },
-      })
+      let context =
+        // context prop is used for args in graphql
+        createPage({
+          path: page.node.fields.slug,
+          component,
+          context: {
+            slug: page.node.fields.slug,
+            articleId: page.node.fields.articleId,
+            previous,
+            next,
+          },
+        })
     })
 
     return null
   })
-}
-
-const makeTextSlugFriendly = str => _.kebabCase(str.toLowerCase())
-
-exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions
-  if (node.internal.type === `MarkdownRemark`) {
-    const basename = path.basename(node.fileAbsolutePath, ".md")
-    let urlEnd = node.frontmatter.title
-
-    const folders = path.dirname(node.fileAbsolutePath).split("/")
-    const lastFolder = folders[folders.length - 1]
-    const secondLastFolder = folders[folders.length - 2]
-    let type = lastFolder // used also for posts
-    if (secondLastFolder === "articles") {
-      const splitName = basename.split("-") // basename is 1 (article) or 1-1 (card)
-
-      if (splitName.length === 2) {
-        type = "cards"
-        urlEnd = "" // don't add title to url
-        createNodeField({
-          name: `articleId`,
-          node,
-          value: splitName[0],
-        })
-        createNodeField({
-          name: `cardId`,
-          node,
-          value: basename,
-        })
-      }
-
-      if (splitName.length === 1) {
-        type = "articles"
-      }
-    }
-
-    // post/title OR card/1-1 OR article/1/title
-    const slug =
-      "/" + type + "/" + basename + "/" + makeTextSlugFriendly(urlEnd)
-
-    createNodeField({
-      name: `slug`,
-      node,
-      value: slug,
-    })
-
-    createNodeField({
-      name: `id`,
-      node,
-      value: basename,
-    })
-
-    createNodeField({
-      name: `type`,
-      node,
-      value: type,
-    })
-  }
 }

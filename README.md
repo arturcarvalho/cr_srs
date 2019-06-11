@@ -2,17 +2,11 @@
 
 ## dev start
 
-```sh
-npm start
-```
+> npm start
 
-## generate id for cards
+## Decisions (higher are more recent)
 
-I'm just using this to generate ids. Still no idea how I could auto insert an id on the cards I'm generating. I'd need some kind of weird trigger onFileCreate or something. Looks like too much work for what is needed.
-http://www.shortguid.com/#/guid/uid-64
-
-## Decisions
-
+- The markdown is an article when the md file has the same name as the folder it's in.
 - Using the convention to use lower case file names for the componentsto fit with gatsby conventions.
 - Going to move everything to CSS modules. Starting with the card components.
 - Not doing tests yet, the idea is still not consolidated.
@@ -20,8 +14,16 @@ http://www.shortguid.com/#/guid/uid-64
 
 ## Structure
 
-- article 1.md is stored inside folder articles/1.
-- the 1-n.md files inside the articles/1 folder are the cards associated with article 1.md.
+- I want to be able to move cards around, even if they just belong to one article (easy article split)
+- It's possible to change article url by changing title, but don't change the file name.
+
+- article bla.md is stored inside folder articles/bla/bla.md.
+- The article and folder name must be the same (excluding .md)
+- The other files inside an article folder are the cards.
+
+/articles/kebab-title: http://localhost:8000/articles/javascript-sleep
+/cards/filename: http://localhost:8000/cards/4-3
+/posts/kebab-title: http://localhost:8000/posts/new-beginnings
 
 ## Credits
 
