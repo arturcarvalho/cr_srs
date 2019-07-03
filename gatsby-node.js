@@ -3,10 +3,19 @@ const _ = require("lodash")
 
 const makeTextSlugFriendly = str => _.kebabCase(str.toLowerCase())
 
-exports.onCreateNode = ({ node, actions, getNode }) => {
+exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions
   if (node.internal.type === `MarkdownRemark`) {
     const basename = path.basename(node.fileAbsolutePath, ".md")
+
+    // Files starting with underscore are drafts.
+    const isDraft = name => /^_.*/.test(name)
+
+    // Ignore drafts. It generates null node fields. 
+    // They are filtered on createPages.
+    if (isDraft(basename)) {
+      return
+    }
 
     const folders = path.dirname(node.fileAbsolutePath).split("/")
     const lastFolder = folders[folders.length - 1]
@@ -89,8 +98,8 @@ exports.createPages = ({ graphql, actions }) => {
       throw result.errors
     }
 
-    // Create all types of pages.
-    const pages = result.data.allMarkdownRemark.edges
+    // Create all types of pages, but ignore the drafts (null fields)
+    const pages = result.data.allMarkdownRemark.edges.filter(p => !!p.fields)
 
     // check pages don't have same name
     const slugs = pages.map(page => page.node.fields.slug)
@@ -105,18 +114,17 @@ exports.createPages = ({ graphql, actions }) => {
       if (page.node.fields.type === "cards") component = card
       if (page.node.fields.type === "articles") component = article
 
-      let context =
-        // context prop is used for args in graphql
-        createPage({
-          path: page.node.fields.slug,
-          component,
-          context: {
-            slug: page.node.fields.slug,
-            articleId: page.node.fields.articleId,
-            previous,
-            next,
-          },
-        })
+      // context prop is used for args in graphql
+      let context = createPage({
+        path: page.node.fields.slug,
+        component,
+        context: {
+          slug: page.node.fields.slug,
+          articleId: page.node.fields.articleId,
+          previous,
+          next,
+        },
+      })
     })
 
     return null
