@@ -11,7 +11,7 @@ exports.onCreateNode = ({ node, actions }) => {
     // Files starting with underscore are drafts.
     const isDraft = name => /^_.*/.test(name)
 
-    // Ignore drafts. It generates null node fields. 
+    // Ignore drafts. It generates null node fields.
     // They are filtered on createPages.
     if (isDraft(basename)) {
       return
@@ -98,8 +98,10 @@ exports.createPages = ({ graphql, actions }) => {
       throw result.errors
     }
 
-    // Create all types of pages, but ignore the drafts (null fields)
-    const pages = result.data.allMarkdownRemark.edges.filter(p => !!p.fields)
+    // Create all types of pages, but ignore the drafts (null fields).
+    const pages = result.data.allMarkdownRemark.edges.filter(
+      p => !!p.node.fields
+    )
 
     // check pages don't have same name
     const slugs = pages.map(page => page.node.fields.slug)

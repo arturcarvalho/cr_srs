@@ -6,6 +6,7 @@
 
 ## Decisions (higher are more recent)
 
+- Files starting with underscore are drafts.
 - The markdown is an article when the md file has the same name as the folder it's in.
 - Using the convention to use lower case file names for the componentsto fit with gatsby conventions.
 - Going to move everything to CSS modules. Starting with the card components.

@@ -30,17 +30,18 @@ function Menu({ title }) {
               <Link
                 activeClassName="active-menu-item"
                 className="menu-nav-item"
+                to={"/blog"}
+              >
+                Blog
+              </Link>
+
+              <Link
+                activeClassName="active-menu-item"
+                className="menu-nav-item"
                 to={"/articles"}
               >
                 Articles
               </Link>
-              {/* <Link
-                activeClassName="active-menu-item"
-                className="menu-nav-item"
-                to={"/cards"}
-              >
-                Cards
-              </Link> */}
             </nav>
           </header>
         )
