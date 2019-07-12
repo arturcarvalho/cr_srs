@@ -55,7 +55,7 @@ export const pageQuery = graphql`
     }
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { fields: { type: { eq: "posts" } } }
+      filter: { fields: { type: { eq: "posts" }, draft: { ne: true } } }
     ) {
       edges {
         node {

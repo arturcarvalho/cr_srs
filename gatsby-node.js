@@ -8,15 +8,6 @@ exports.onCreateNode = ({ node, actions }) => {
   if (node.internal.type === `MarkdownRemark`) {
     const basename = path.basename(node.fileAbsolutePath, ".md")
 
-    // Files starting with underscore are drafts.
-    const isDraft = name => /^_.*/.test(name)
-
-    // Ignore drafts. It generates null node fields.
-    // They are filtered on createPages.
-    if (isDraft(basename)) {
-      return
-    }
-
     const folders = path.dirname(node.fileAbsolutePath).split("/")
     const lastFolder = folders[folders.length - 1]
     const secondLastFolder = folders[folders.length - 2]
@@ -38,6 +29,19 @@ exports.onCreateNode = ({ node, actions }) => {
       // posts
       type = "posts"
       slug = "/" + type + "/" + makeTextSlugFriendly(node.frontmatter.title)
+    }
+
+    // Files starting with underscore are drafts.
+    const isDraft = name => /^_.*/.test(name)
+
+    // Ignore drafts. It generates null node fields.
+    // They are filtered on createPages.
+    if (isDraft(basename)) {
+      createNodeField({
+        name: `draft`,
+        node,
+        value: true,
+      })
     }
 
     // needed on articles and cards
@@ -99,9 +103,7 @@ exports.createPages = ({ graphql, actions }) => {
     }
 
     // Create all types of pages, but ignore the drafts (null fields).
-    const pages = result.data.allMarkdownRemark.edges.filter(
-      p => !!p.node.fields
-    )
+    const pages = result.data.allMarkdownRemark.edges
 
     // check pages don't have same name
     const slugs = pages.map(page => page.node.fields.slug)
