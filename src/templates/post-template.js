@@ -35,7 +35,7 @@ function BlogPostTemplate(props) {
       >
         {post.frontmatter.date} {` - ${post.timeToRead} min read`}
       </p>
-      <div dangerouslySetInnerHTML={{ __html: post.html }} />
+      <div className={styles.main} dangerouslySetInnerHTML={{ __html: post.html }} />
       <hr
         style={{
           marginBottom: rhythm(1),

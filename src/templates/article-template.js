@@ -57,7 +57,7 @@ function ArticlesTemplate(props) {
       >
         {article.frontmatter.date} {` - ${article.timeToRead} min read`}
       </p>
-      <div dangerouslySetInnerHTML={{ __html: article.html }} />
+      <div className={styles.main} dangerouslySetInnerHTML={{ __html: article.html }} />
 
       {cards.length > 0 && (
         <section className={styles.cards}>
