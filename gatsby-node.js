@@ -113,9 +113,25 @@ exports.createPages = ({ graphql, actions }) => {
     const slugs = pages.map(page => page.node.fields.slug)
     if (slugs.length !== new Set(slugs).size) throw "Duplicate pages"
 
+    const getPrevious = (posts, index) => {
+      if (index + 1 >= posts.length) return null // no more posts
+
+      const prevNode = posts[index + 1].node
+      if (prevNode.draft) return getPrevious(posts, index + 1) // jump drafts
+      return prevNode
+    }
+
+    const getNext = (posts, index) => {
+      if (index - 1 <= 0) return null // no more posts
+      const nextNode = posts[index - 1].node
+
+      if (nextNode.draft) return getNext(posts, index - 1)
+      return nextNode
+    }
+
     posts.forEach((page, index) => {
-      const previous = index === posts.length - 1 ? null : posts[index + 1].node
-      const next = index === 0 ? null : posts[index - 1].node
+      const previous = getPrevious(posts, index)
+      const next = getNext(posts, index)
 
       // context prop is used for args in graphql
       createPage({
