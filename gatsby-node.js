@@ -34,8 +34,6 @@ exports.onCreateNode = ({ node, actions }) => {
     // Files starting with underscore are drafts.
     const isDraft = name => /^_.*/.test(name)
 
-    // Ignore drafts. It generates null node fields.
-    // They are filtered on createPages.
     if (isDraft(basename)) {
       createNodeField({
         name: `draft`,
@@ -125,7 +123,7 @@ exports.createPages = ({ graphql, actions }) => {
       if (index - 1 <= 0) return null // no more posts
       const nextNode = posts[index - 1].node
 
-      if (nextNode.draft) return getNext(posts, index - 1)
+      if (nextNode.draft) return getNext(posts, index - 1) // jump drafts
       return nextNode
     }
 

@@ -39,7 +39,6 @@ function ArticlesIndex(props) {
         )
 
         const status = showArticleStatus(articleCards, props.cardsById)
-
         const tags = node.frontmatter.tags
 
         if (tags) {
@@ -104,7 +103,7 @@ export const pageQuery = graphql`
     }
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { fields: { type: { eq: "articles" } } }
+      filter: { fields: { type: { eq: "articles" }, draft: { ne: true } } }
     ) {
       edges {
         node {

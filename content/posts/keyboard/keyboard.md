@@ -57,4 +57,4 @@ There's a technique I've been using for a long time. You can use the palm of you
 
 If you spend a lot of time typing, you should consider getting a better keyboard.
 
-It feels like when you start using eyeglasses. You only notice how bad it was before when you change to something better.
+It feels like when you start using eyeglasses. You only notice how bad it was before, when you change to something better.

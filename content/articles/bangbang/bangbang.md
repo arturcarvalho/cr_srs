@@ -56,7 +56,7 @@ And the next ones are values that are true, but may seem that they should be fal
 
 <br/>
 
-You can also use a [Boolean function](javascript-boolean-function) to to do equivalent conversions.
+You can also use a [Boolean function](javascript-boolean-function) to do equivalent conversions.
 
 - Should you learn both? Yes, they can be seen in many codebases.
 - Which one is faster? In recent browsers, they should be similar ([jsperf](https://jsperf.com/double-exclamation-mark-vs-boolean)).
