@@ -4,6 +4,7 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
+import styles from "./post.module.css"
 
 function BlogPostTemplate(props) {
   const post = props.data.markdownRemark
@@ -16,6 +17,13 @@ function BlogPostTemplate(props) {
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
       />
+      {post.fields.draft && (
+        <section className={styles.draft}>
+          <h1>Draft</h1>
+          <p>This is a work in progress. It may change or be deleted.</p>
+        </section>
+      )}
+
       <h1>{post.frontmatter.title}</h1>
       <p
         style={{
@@ -76,6 +84,9 @@ export const pageQuery = graphql`
       }
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {
+      fields {
+        draft
+      }
       id
       excerpt(pruneLength: 160)
       html

@@ -102,7 +102,6 @@ exports.createPages = ({ graphql, actions }) => {
       throw result.errors
     }
 
-    // Create all types of pages, but ignore the drafts (null fields).
     const pages = result.data.allMarkdownRemark.edges
 
     // check pages don't have same name
