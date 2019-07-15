@@ -86,6 +86,9 @@ exports.createPages = ({ graphql, actions }) => {
         ) {
           edges {
             node {
+              frontmatter {
+                title
+              }
               fields {
                 slug
                 id
@@ -103,29 +106,42 @@ exports.createPages = ({ graphql, actions }) => {
     }
 
     const pages = result.data.allMarkdownRemark.edges
+    const posts = pages.filter(page => page.node.fields.type === "posts")
+    const notPosts = pages.filter(page => page.node.fields.type !== "posts")
 
     // check pages don't have same name
     const slugs = pages.map(page => page.node.fields.slug)
     if (slugs.length !== new Set(slugs).size) throw "Duplicate pages"
 
-    pages.forEach((page, index) => {
-      const previous = index === pages.length - 1 ? null : pages[index + 1].node
-      const next = index === 0 ? null : pages[index - 1].node
-
-      let component
-      if (page.node.fields.type === "posts") component = post
-      if (page.node.fields.type === "cards") component = card
-      if (page.node.fields.type === "articles") component = article
+    posts.forEach((page, index) => {
+      const previous = index === posts.length - 1 ? null : posts[index + 1].node
+      const next = index === 0 ? null : posts[index - 1].node
 
       // context prop is used for args in graphql
-      let context = createPage({
+      createPage({
         path: page.node.fields.slug,
-        component,
+        component: post,
         context: {
           slug: page.node.fields.slug,
           articleId: page.node.fields.articleId,
           previous,
           next,
+        },
+      })
+    })
+
+    notPosts.forEach(page => {
+      let component
+      if (page.node.fields.type === "cards") component = card
+      if (page.node.fields.type === "articles") component = article
+
+      // context prop is used for args in graphql
+      createPage({
+        path: page.node.fields.slug,
+        component,
+        context: {
+          slug: page.node.fields.slug,
+          articleId: page.node.fields.articleId,
         },
       })
     })

@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -9,7 +9,7 @@ import styles from "./post.module.css"
 function BlogPostTemplate(props) {
   const post = props.data.markdownRemark
   const siteTitle = props.data.site.siteMetadata.title
-  // const { previous, next } = props.pageContext
+  const { previous, next } = props.pageContext
 
   return (
     <Layout location={props.location} title={siteTitle}>
@@ -42,7 +42,7 @@ function BlogPostTemplate(props) {
         }}
       />
 
-      {/* <ul
+      <ul
         style={{
           display: `flex`,
           flexWrap: `wrap`,
@@ -52,20 +52,20 @@ function BlogPostTemplate(props) {
         }}
       >
         <li>
-            {previous && (
-              <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
-              </Link>
-            )}
-          </li>
-          <li>
-            {next && (
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
-              </Link>
-            )}
-          </li> 
-      </ul>*/}
+          {previous && (
+            <Link to={previous.fields.slug} rel="prev">
+              ← {previous.frontmatter.title}
+            </Link>
+          )}
+        </li>
+        <li>
+          {next && (
+            <Link to={next.fields.slug} rel="next">
+              {next.frontmatter.title} →
+            </Link>
+          )}
+        </li>
+      </ul>
     </Layout>
   )
 }
