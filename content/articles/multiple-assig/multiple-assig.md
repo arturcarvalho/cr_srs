@@ -2,10 +2,10 @@
 title: "JavaScript multiple left-hand assignment "
 date: 2019-05-13
 tags: ["JavaScript"]
-description: "var a=b=c=1"
+description: "What happens when you do: 'var a=b=c=1'"
 ---
 
-You can assign multiple variables in JavaScript in the same line of code:
+In JavaScript, you can assign multiple variables in the same line of code:
 
 ```js
 var a = 1, b = 2
@@ -22,18 +22,6 @@ console.log(a) // ReferenceError: a is not defined
 ```
 
 <br/>
-Everything seems working correctly right? What if you do this instead:
-
-```js
-function f() {
-  var a = b = 2
-}
-f()
-console.log(a)
-console.log(b)
-```
-
-<br/>
 What just happened? Assignment is right associative (pairs from right to left), so the next two lines of code are equivalent:
 
 ```js
@@ -41,7 +29,7 @@ var a = b = c = 2
 var a = (window.b = (window.c = 2))
 ```
 <br/>
-The right most pair is like an assignment when we forget to put the var keyword.
+The right most pair is like an assignment when you forget to put the var keyword.
 
 
 You can also think about `var a = b = 3` as
@@ -53,4 +41,4 @@ var a = b
 
 <br/>
 
-Reference: [stackoverflow](https://stackoverflow.com/a/1758912/1013)
+- reference: [stackoverflow](https://stackoverflow.com/a/1758912/1013)
