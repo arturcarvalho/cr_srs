@@ -14,12 +14,12 @@ There are several ways to convert a value to a boolean. Here, you use the [Boole
 There are only **6 falsy values**, the rest are truthy values. The 6 falsy values:
 
 ```js
-Boolean(false) // false
-Boolean("") // false, an empty string. `` and '' are also false.
-Boolean(0) // false, the number zero.
-Boolean(NaN) // false, not a number.
-Boolean(null) // false
-Boolean(undefined) // false
+Boolean(false) // → false
+Boolean("") // → false. An empty string. `` and '' are also false.
+Boolean(0) // → false. The number zero. -0 is also false.
+Boolean(NaN) // → false. Not a number.
+Boolean(null) // → false.
+Boolean(undefined) // → false.
 ```
 
 <br/>
@@ -27,19 +27,19 @@ Let's see some examples that may seem to be false, but are true.
 
 ```js
 Boolean(new Boolean(false))
-// true, new always returns true.
+// → true, new always returns true.
 
 Boolean("false")
-// true, only empty string is false.
+// → true, only empty string is false.
 
 Boolean({})
-// true, empty object is not one of the 6 falsy values.
+// → true, empty object is not one of the 6 falsy values.
 
 Boolean([])
-// true, empty array is not one of the 6 falsy values.
+// → true, empty array is not one of the 6 falsy values.
 
 Boolean(-1)
-// true, -1 is not 0, so it returns true.
+// → true, -1 is not 0, so it returns true.
 ```
 
 - reference: [MDN Falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)
