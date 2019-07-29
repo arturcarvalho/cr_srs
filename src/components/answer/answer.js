@@ -5,7 +5,7 @@ import styles from "./answer.module.css"
 const answer = ({ correct }) => {
   return (
     <section className={styles.answer}>
-      <header>The correct answer</header>
+      <header>Correct answer:</header>
       <blockquote>{correct}</blockquote>
     </section>
   )

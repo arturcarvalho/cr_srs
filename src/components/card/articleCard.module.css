@@ -1,12 +1,12 @@
 .container {
-  margin-bottom: 1.5em;
+  margin-bottom: 6px;
 }
 
 .header {
   display: flex;
   align-items: center;
 
-  background-color: var(--black-color);
+  background-color: var(--blue-color);
   color: var(--white-color);
   font-weight: bold;
   font-size: 1.5em;
@@ -28,9 +28,9 @@
 
 .body {
   padding: 15px;
-  border-left: 1px solid var(--black-color);
-  border-right: 1px solid var(--black-color);
-  border-bottom: 1px solid var(--black-color);
+  border-left: 1px solid var(--blue-color);
+  border-right: 1px solid var(--blue-color);
+  border-bottom: 1px solid var(--blue-color);
   border-bottom-left-radius: var(--round-corners);
   border-bottom-right-radius: var(--round-corners);
 }
