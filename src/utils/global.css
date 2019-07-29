@@ -164,3 +164,9 @@ body {
   background: var(--red-color);
   color: var(--white-color);
 }
+
+/* PRIMJS */
+
+pre[class*="language-"] {
+  background: none !important; /* Too lazy to find the culprit */
+}
